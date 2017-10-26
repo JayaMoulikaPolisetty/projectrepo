@@ -10,6 +10,8 @@
         
             <meta http-equiv="Content-Type" content="text/html;">
             <title>Registration</title>
+            
+            <jsp:include page="header.jsp"></jsp:include>
         </head>
         <body>
             <form:form id="regForm" modelAttribute="customer" action="registerProcess" method="post">
