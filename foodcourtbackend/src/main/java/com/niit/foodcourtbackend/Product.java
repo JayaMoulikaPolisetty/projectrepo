@@ -1,12 +1,19 @@
 package com.niit.foodcourtbackend;
 
+import java.io.Serializable;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
-public class Product {
+public class Product implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -14,6 +21,17 @@ public class Product {
 	private String productName;
 	private String productDesc;
 	private double productPrice;
+	
+	@OneToOne 
+	private Category category;
+	 
+	
+	public Category getCategory() {
+		return this.category;
+	}
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 	public int getProductId() {
 		return this.productId;
 	}

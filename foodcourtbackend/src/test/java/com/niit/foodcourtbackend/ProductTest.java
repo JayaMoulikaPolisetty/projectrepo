@@ -7,13 +7,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import com.niit.foodcourtbackend.dao.CategoryDao;
 import com.niit.foodcourtbackend.dao.ProductDao;
 
 public class ProductTest {
 
 	AnnotationConfigApplicationContext context;
 	ProductDao productDao;
+	CategoryDao categoryDao;
 	Product product;
+	Category category;
 
 @Before
 public void init()
@@ -23,15 +26,21 @@ public void init()
 	context.refresh();
 	productDao =(ProductDao)context.getBean("productDao");
 	product = new Product();
+	categoryDao=(CategoryDao)context.getBean("categoryDao");
+	category=new Category();
 }
+
 
 /*@Test
 public void test()
 {
-	product.setProductName("Burger");
+	category.setCatName("pizza");
+	category.setCatDesc("Pizza types veg and non veg");
+	product.setProductName("Pizza");
 	product.setProductDesc("Burger with extra cheese");
 	product.setProductPrice(250);
-
+	product.setCategory(category);
+	Assert.assertEquals("Category added successfully", true, categoryDao.addCategory(category) );
 	Assert.assertEquals("Product added successfully", true, productDao.addProduct(product) );
 	
 }*/
@@ -43,17 +52,20 @@ public void test()
 	productDao.deleteProduct(product);
 }*/
 
-/*@Test
+@Test
 public void test()
 {
 	product = productDao.getProduct(2);
 	product.setProductDesc("Burger with double extra cheese");
 	product.setProductPrice(290);
+	category.setCatId(1);
+	product.setCategory(category);
+
 	
 	Assert.assertEquals("Product updated successfully", true, productDao.updateProduct(product));
-}*/
+}
 
-@Test
+/*@Test
 public void test()
 {
 	List<Product> products = productDao.retreiveAllProducts();
@@ -63,5 +75,5 @@ public void test()
 		System.out.println(product.getProductName()+","+product.getProductDesc()+","+product.getProductPrice());
 	}
 	
-}
+}*/
 }

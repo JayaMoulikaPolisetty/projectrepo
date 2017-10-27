@@ -55,14 +55,14 @@ public class CustomerTest {
 		customerDao.deleteCustomer(customer);
 	}*/
 
-	@Test
+	/*@Test
 	public void test() {
 		
 		  customer= customerDao.getCustomer(33);
 		  customer.setAddress("Hyderabad");
 		  assertEquals("update successful",true,customerDao.updateCustomer(customer));
 	}
-	
+	*/
 /*@Test
 	public void test() {
 		

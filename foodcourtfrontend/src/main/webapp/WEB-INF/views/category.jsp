@@ -10,45 +10,38 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         
             <meta http-equiv="Content-Type" content="text/html;">
-            <title>Add Products</title>
+            <title>Add Categories</title>
             <jsp:include page="header.jsp"></jsp:include>
             
             
             
         </head>
         <body>
-            <form:form id="prodForm" modelAttribute="product" action="prodProcess" method="post">
+            <form:form id="catForm" modelAttribute="category" action="catProcess" method="post">
             <div class="table-responsive">
-            <center><h2>Products form</h2></center></br>
+            <center><h2>Category form</h2></center></br>
                 <table align="center" class="table" style = "width:60%">
                     
                     <tr>
                         <td>
-                            <form:label path="productName">Product Name</form:label>
+                            <form:label path="catName">Category Name</form:label>
                         </td>
                         <td>
-                            <form:input path="productName" name="productName" id="productName" />
+                            <form:input path="catName" name="catName" id="catName" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <form:label path="productDesc">Product Description</form:label>
+                            <form:label path="catDesc">Category Description</form:label>
                         </td>
                         <td>
-                            <form:input path="productDesc" name="productDesc" id="productDesc" />
+                            <form:input path="catDesc" name="catDesc" id="catDesc" />
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <form:label path="productPrice">Product Price</form:label>
-                        </td>
-                        <td>
-                            <form:input path="productPrice" name="productPrice" id="productPrice" />
-                        </td>
-                    </tr>
                         <td></td>
                         <td>
-                            <form:button id="product" name="addProduct">Add product</form:button>
+                            <form:button id="category" name="addCategory">Add Category</form:button>
                         </td>
                     </tr>
                     <tr></tr>
@@ -59,16 +52,15 @@
             <div class="table-responsive" >
             <table align="center" class="table table-inverse" style = "width:80%">
 			<tr>
-			<th>Product Name</th>
-			<th>Product Description</th>
-			<th>Price</th>
+			<th>Category Name</th>
+			<th>Category Description</th>
+			
 			</tr>
-			<c:forEach items = "${prodlist}" var="products">
+			<c:forEach items = "${catlist}" var="cat">
 			
 			<tr>
-			<td>${products.productName}</td>
-			<td>${products.productDesc}</td>
-			<td>${products.productPrice}</td>
+			<td>${cat.catName}</td>
+			<td>${cat.catDesc}</td>
 			</tr>
 			</c:forEach>
 			</table>

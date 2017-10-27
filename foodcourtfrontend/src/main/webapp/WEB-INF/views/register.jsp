@@ -15,7 +15,8 @@
         </head>
         <body>
             <form:form id="regForm" modelAttribute="customer" action="registerProcess" method="post">
-                <table align="center">
+                <table align="center"class="table" style = "width:60%">
+                <center><h2>Registration form</h2></center>
                     
                     <tr>
                         <td>

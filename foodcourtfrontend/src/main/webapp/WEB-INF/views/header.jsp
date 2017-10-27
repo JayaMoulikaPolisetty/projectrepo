@@ -22,7 +22,7 @@
       <li class="active"><a href="#">Home</a></li>
       <li><a href="product">Products</a></li>
       <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categories
+        <a class="dropdown-toggle" data-toggle="dropdown" href="category">Categories
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="#">Page 1-1</a></li>
