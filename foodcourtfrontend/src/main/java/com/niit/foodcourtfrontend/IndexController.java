@@ -1,13 +1,12 @@
 package com.niit.foodcourtfrontend;
 
-
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,9 +31,10 @@ public class IndexController {
 	CategoryDao categoryDao;
 	
 	@RequestMapping("/")
-	public ModelAndView index()
+	public ModelAndView index(Model m)
 	{
-		
+		List<Category> listcategories = categoryDao.retreiveAllCategories();
+		m.addAttribute("catlist", listcategories);
 		return new ModelAndView("index");
 	}
 
@@ -48,7 +48,7 @@ public class IndexController {
 	}
 	
 	@RequestMapping(value = "/registerProcess", method = RequestMethod.POST)
-	public String addCustomer(@ModelAttribute("customer") Customer customer, Model m)
+	public String addCustomer(@ModelAttribute("customer") Customer customer)
 	{
 		
 		customerDao.addCustomer(customer);
@@ -58,7 +58,7 @@ public class IndexController {
 	}
 
 	@RequestMapping("/product")
-	public ModelAndView products(Model m)
+	public ModelAndView product(Model m)
 	{
 		Product product = new Product();
 		m.addAttribute(product);
