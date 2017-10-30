@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>  
     <%@ page language="java" contentType="text/html;" %>
         <html>
@@ -46,9 +47,27 @@
                             <form:input path="productPrice" name="productPrice" id="productPrice" />
                         </td>
                     </tr>
-                        <td></td>
+                     <tr>
+                     <td>
+                      <form:label path="category">Select Category</form:label>
+                     </td>
+                     <td>
+                   <%--  <form:select id="categoryList" path="category">
+                    <form:option value="0" label="---Select Category---" />
+            			<c:forEach items="${catlist}" var="cat">
+               				 <form:option  value="${cat.catName}" />
+            			</c:forEach>
+    				</form:select>   --%>
+    				<form:select path="category.catId">
+    				 <form:option value="0" label="---Select Category---" />
+                      <form:options items="${catlist}" itemValue="catId" itemLabel="catName" />
+                    </form:select>
+                     </td>
+                     </tr>
+                   
+                       <tr>
                         <td>
-                            <form:button id="product" name="addProduct">Add product</form:button>
+                            <form:button id="product" name="addProduct" >Add product</form:button>
                         </td>
                     </tr>
                     <tr></tr>
@@ -73,5 +92,7 @@
 			</c:forEach>
 			</table>
 			</div>
+			
+	            
         </body>
         </html>

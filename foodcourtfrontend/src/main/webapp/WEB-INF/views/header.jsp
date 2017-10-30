@@ -14,7 +14,7 @@
         <ul class="dropdown-menu">
         
          <c:forEach items = "${catlist}" var="cat">
-         <li><a href=""products">${cat.catName}</a></li>
+         <li><a href="products">${cat.catName}</a></li>
          </c:forEach>
         
         </ul>

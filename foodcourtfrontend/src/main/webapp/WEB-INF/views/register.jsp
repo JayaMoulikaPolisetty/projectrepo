@@ -60,7 +60,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <form:label path="password">Comfirm Password</form:label>
+                            <form:label path="password">Confirm Password</form:label>
                         </td>
                         <td>
                             <form:password path="password" name="password" id="password" />

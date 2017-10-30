@@ -1,10 +1,13 @@
 package com.niit.foodcourtfrontend;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,15 +47,18 @@ public class IndexController {
 	{
 		Customer customer=new Customer();
 		m.addAttribute(customer);
+		List<Category> listcategories = categoryDao.retreiveAllCategories();
+		m.addAttribute("catlist", listcategories);
 		return new ModelAndView("register");
 	}
 	
 	@RequestMapping(value = "/registerProcess", method = RequestMethod.POST)
-	public String addCustomer(@ModelAttribute("customer") Customer customer)
+	public String addCustomer(@ModelAttribute("customer") Customer customer, Model m)
 	{
 		
 		customerDao.addCustomer(customer);
-		
+		List<Category> listcategories = categoryDao.retreiveAllCategories();
+		m.addAttribute("catlist", listcategories);
 		return "index";
 		
 	}
@@ -65,17 +71,24 @@ public class IndexController {
 
 		List<Product> listProducts = productDao.retreiveAllProducts();
 		m.addAttribute("prodlist", listProducts);
+		List<Category> listcategories = categoryDao.retreiveAllCategories();
+		m.addAttribute("catlist", listcategories);
+		
 		return new ModelAndView("product");
 	}
 	
 	@RequestMapping(value = "/prodProcess", method = RequestMethod.POST)
-	public String addProduct(@ModelAttribute("product") Product product, Model m)
+	public ModelAndView addProduct(@ModelAttribute("product") Product product , Model m, BindingResult result)
 	{
 		
 		productDao.addProduct(product);
+				
 		List<Product> listProducts = productDao.retreiveAllProducts();
 		m.addAttribute("prodlist", listProducts);
-		return "product";
+		List<Category> listcategories = categoryDao.retreiveAllCategories();
+		m.addAttribute("catlist", listcategories);
+		
+		return new ModelAndView("product");
 		
 	}
 	
