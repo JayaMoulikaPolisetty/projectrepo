@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Transient;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 public class Product implements Serializable{
@@ -24,8 +26,17 @@ public class Product implements Serializable{
 	
 	@OneToOne 
 	private Category category;
+	
+	@Transient
+	private MultipartFile pimage;
 	 
 	
+	public MultipartFile getPimage() {
+		return this.pimage;
+	}
+	public void setPimage(MultipartFile pimage) {
+		this.pimage = pimage;
+	}
 	public Category getCategory() {
 		return this.category;
 	}

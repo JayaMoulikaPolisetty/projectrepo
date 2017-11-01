@@ -18,7 +18,7 @@
             
         </head>
         <body>
-            <form:form id="prodForm" modelAttribute="product" action="prodProcess" method="post">
+            <form:form id="prodForm" modelAttribute="product" action="prodProcess" enctype="multipart/form-data" method="post">
             <div class="table-responsive">
             <center><h2>Products form</h2></center></br>
                 <table align="center" class="table" style = "width:60%">
@@ -52,25 +52,29 @@
                       <form:label path="category">Select Category</form:label>
                      </td>
                      <td>
-                   <%--  <form:select id="categoryList" path="category">
-                    <form:option value="0" label="---Select Category---" />
-            			<c:forEach items="${catlist}" var="cat">
-               				 <form:option  value="${cat.catName}" />
-            			</c:forEach>
-    				</form:select>   --%>
     				<form:select path="category.catId">
     				 <form:option value="0" label="---Select Category---" />
                       <form:options items="${catlist}" itemValue="catId" itemLabel="catName" />
                     </form:select>
                      </td>
                      </tr>
-                   
+                      <tr>
+                      <td>
+                          <form:label path="pimage">Upload Image</form:label>
+                      </td>
+                      <td>
+                           <form:input path ="pimage" type ="file" />
+                      </td>
+                      </tr>
                        <tr>
+                       <td></td>
                         <td>
                             <form:button id="product" name="addProduct" >Add product</form:button>
                         </td>
                     </tr>
-                    <tr></tr>
+                    <tr>
+                    
+                    </tr>
                     
                 </table>
                 </div>
