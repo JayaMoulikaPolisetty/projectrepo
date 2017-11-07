@@ -1,6 +1,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>  
+
+
     <%@ page language="java" contentType="text/html;" %>
         <html>
         <head>
@@ -13,7 +16,7 @@
             <meta http-equiv="Content-Type" content="text/html;">
             <title>Add Products</title>
             <jsp:include page="header.jsp"></jsp:include>
-            
+              <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
             
             
         </head>
@@ -21,63 +24,44 @@
             <form:form id="prodForm" modelAttribute="product" action="prodProcess" enctype="multipart/form-data" method="post">
             <div class="table-responsive">
             <center><h2>Products form</h2></center></br>
-                <table align="center" class="table" style = "width:60%">
-                    
-                    <tr>
-                        <td>
-                            <form:label path="productName">Product Name</form:label>
-                        </td>
-                        <td>
-                            <form:input path="productName" name="productName" id="productName" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <form:label path="productDesc">Product Description</form:label>
-                        </td>
-                        <td>
-                            <form:input path="productDesc" name="productDesc" id="productDesc" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <form:label path="productPrice">Product Price</form:label>
-                        </td>
-                        <td>
-                            <form:input path="productPrice" name="productPrice" id="productPrice" />
-                        </td>
-                    </tr>
-                     <tr>
-                     <td>
-                      <form:label path="category">Select Category</form:label>
-                     </td>
-                     <td>
-    				<form:select path="category.catId">
+       <div class="container">
+	   <div class="row">
+		
+		<div class=col-sm-3></div>   
+		<div class="col-sm-6">
+		 	<div class="form-group">
+		      <label for="productName">Product Name:</label>
+		      <form:input path="productName" name="productName" id="firstName" class="form-control"/>
+		     </div>
+		    <div class="form-group">
+		      <label for="productDesc">Product Description:</label>
+		       <form:input path="productDesc" name="productDesc" id="productDesc" class="form-control"/>
+		    </div>
+		    <div class="form-group">
+		      <label for="productPrice">Price:</label>
+		       <form:input path="productPrice" name="productPrice" id="productPrice" class="form-control"/>
+		    </div>
+		    <div class="form-group">
+		      <label for="category">Category:</label>
+		      <div class="dropdown">
+		      <form:select path="category.catId" class="form-control">
     				 <form:option value="0" label="---Select Category---" />
                       <form:options items="${catlist}" itemValue="catId" itemLabel="catName" />
-                    </form:select>
-                     </td>
-                     </tr>
-                      <tr>
-                      <td>
-                          <form:label path="pimage">Upload Image</form:label>
-                      </td>
-                      <td>
-                           <form:input path ="pimage" type ="file" />
-                      </td>
-                      </tr>
-                       <tr>
-                       <td></td>
-                        <td>
-                            <form:button id="product" name="addProduct" >Add product</form:button>
-                        </td>
-                    </tr>
-                    <tr>
-                    
-                    </tr>
-                    
-                </table>
-                </div>
+              </form:select>
+              </div>
+		    </div>
+		    <div class="form-group">
+		      <label for="pimage">Upload Image:</label>
+		      <form:input path ="pimage" type ="file" class="form-control"/>
+		       
+		    </div>
+		    
+		    <button type="submit" class="btn btn-default">Add Product</button>
+		    
+		  </div>
+		  </div>
+		  </div>
+        </div>
             </form:form>
             <div class="table-responsive" >
             <table align="center" class="table table-inverse" style = "width:80%">
@@ -89,7 +73,7 @@
 			<c:forEach items = "${prodlist}" var="products">
 			
 			<tr>
-			<td>${products.productName}</td>
+			<td><a href="${contextPath}/productDisplay/${products.productId}">${products.productName}</a></td>
 			<td>${products.productDesc}</td>
 			<td>${products.productPrice}</td>
 			</tr>

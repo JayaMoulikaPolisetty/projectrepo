@@ -1,6 +1,6 @@
-<!DOCTYPE html>
-
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>  
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -10,19 +10,28 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Food Court</title>
 
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-
-<c:set var="images" value="${contextPath}/resources/carouselPics"/>
-
 </head>
 <body>
 
-<jsp:include page="header.jsp"></jsp:include>
-
+<jsp:include page="header.jsp"/>
 <style>
 
 
-.carousel-inner > .item > img {
+.img-thumbnail
+{
+
+    height:200px;
+	width:200px;
+
+}
+
+.carousel-control
+{
+	height:500px;
+
+}
+
+.carousel-inner >.item > img {
  
   height:400px;
   width:100%;
@@ -36,6 +45,10 @@
 
 }
 </style>
+
+<c:set var="images" value="${contextPath}/resources/carouselPics"/>
+<c:set var="image" value="${contextPath}/resources"/>
+
 <div class="c-wrapper">
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
@@ -60,6 +73,7 @@
     </div>
   </div>
   </div>
+ 
 
   <!-- Left and right controls -->
   <a class="left carousel-control" href="#myCarousel" data-slide="prev">
@@ -70,7 +84,28 @@
     <span class="glyphicon glyphicon-chevron-right"></span>
     <span class="sr-only">Next</span>
   </a>
+ </div>
+ 
+ <div class="container">
+ 
+				<h3>Featured Products</h3>
+				
+				<div class="row">
+				<c:forEach items = "${prodlist}" var="products">
+				  <div class="col-md-3" style="text-align:center">
+				 
+						<a href="${contextPath}/productDisplay/${products.productId}"><img src="${image}/${products.productId}.jpg" class="img-thumbnail"></a>
+						<h4>${products.productName}</h4> 
+					
+				  </div>
+				  </c:forEach>
+				
+			</div>
+ 			
+		
+		
 </div>
-
+	 
+	
 </body>
 </html>

@@ -3,12 +3,11 @@ package com.niit.foodcourtfrontend;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.HashMap;
+import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.io.FileUtils;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,6 +44,8 @@ public class IndexController {
 	{
 		List<Category> listcategories = categoryDao.retreiveAllCategories();
 		m.addAttribute("catlist", listcategories);
+		List<Product> listProducts = productDao.retreiveAllProducts();
+		m.addAttribute("prodlist", listProducts);
 		return new ModelAndView("index");
 	}
 
@@ -60,13 +61,13 @@ public class IndexController {
 	}
 	
 	@RequestMapping(value = "/registerProcess", method = RequestMethod.POST)
-	public String addCustomer(@ModelAttribute("customer") Customer customer, Model m)
+	public ModelAndView addCustomer(@ModelAttribute("customer") Customer customer, Model m)
 	{
 		
 		customerDao.addCustomer(customer);
 		List<Category> listcategories = categoryDao.retreiveAllCategories();
 		m.addAttribute("catlist", listcategories);
-		return "index";
+		return new ModelAndView("index");
 		
 	}
 
@@ -85,16 +86,20 @@ public class IndexController {
 	}
 	
 	@RequestMapping(value = "/prodProcess", method = RequestMethod.POST)
-	public ModelAndView addProduct(@ModelAttribute("product") Product product , @RequestParam("pimage") MultipartFile file, Model m, BindingResult result)
+	public ModelAndView addProduct(@ModelAttribute("product") Product product , @RequestParam("pimage") MultipartFile file, Model m, BindingResult result,HttpServletRequest request)
 	{
 		
 		productDao.addProduct(product);
 		
-		String path = "E:/eclipse examples/foodcourtfrontend/src/main/webapp/resources/";
+	    String path = request.getServletContext().getRealPath("/resources/");
 		
 		String totalFilewithPath = path+String.valueOf(product.getProductId())+".jpg";
 		
+		System.out.println(totalFilewithPath);
+		
 		File productImage = new File(totalFilewithPath);
+		
+		
 		
 		if(!file.isEmpty())
 		{
@@ -146,14 +151,24 @@ public class IndexController {
 		
 	}
 	
-	/*@RequestMapping(value = "/CategorizedProducts/catId", method = RequestMethod.GET)
-	public ModelAndView products(@PathVariable int catId, Model m) {
+	@RequestMapping(value = "/CategorizedProducts/{catId}", method = RequestMethod.GET)
+	public ModelAndView products(@PathVariable("catId") int catId, Model m) {
 	
 		
-		List<Product> products = (List<Product>) productDao.getProduct(catId);
+		List<Category> listcategories = categoryDao.retreiveAllCategories();
+		m.addAttribute("catlist", listcategories);
+		Category cat = categoryDao.getCategory(catId);
+		Collection<Product> products = cat.getProducts();
 		m.addAttribute("catprodlist", products);
 		return new ModelAndView("CategorizedProducts");
 	}
 	
-	*/
+	@RequestMapping(value = "/productDisplay/{productId}", method = RequestMethod.GET)
+	public ModelAndView prodDisplay(@PathVariable("productId") int productId, Model m)
+	{
+		Product product = productDao.getProduct(productId);
+		m.addAttribute(product);
+		return new ModelAndView("productDisplay");
+	}
+	
 }

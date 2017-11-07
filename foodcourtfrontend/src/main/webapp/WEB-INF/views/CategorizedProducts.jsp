@@ -13,27 +13,42 @@
             <meta http-equiv="Content-Type" content="text/html;">
             <title>Add Products</title>
             <jsp:include page="header.jsp"></jsp:include>
+              <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+              <c:set var="image" value = "${contextPath}/resources" />
+            
+            
             
         </head>
         <body>
-        <div class="table-responsive" >
-            <table align="center" class="table table-inverse" style = "width:80%">
-			<tr>
-			<th>Product Name</th>
-			<th>Product Description</th>
-			<th>Price</th>
-			</tr>
-			<c:forEach items = "${catprodlist}" var="products">
+        
+        <style>
+
+
+			.img-thumbnail
+			{
 			
-			<tr>
-			<td>${products.productName}</td>
-			<td>${products.productDesc}</td>
-			<td>${products.productPrice}</td>
-			</tr>
-			</c:forEach>
-			</table>
-			</div>
-        
-        
+			    height:300px;
+				width:300px;
+			
+			}
+			
+		</style>
+		<div class="container">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+        <div class="row">
+				<c:forEach items = "${catprodlist}" var="products">
+				  <div class="col-md-6" style="text-align:center">
+				 
+						<a href="${contextPath}/productDisplay/${products.productId}"><img src="${image}/${products.productId}.jpg" class="img-thumbnail"></a>
+						<h3>${products.productName}</h3> 
+						<h3>${products.productPrice}</h3>
+					
+				  </div>
+				  </c:forEach>
+		</div>
+		</div>
+		</div>
+       
         </body>
         </html>

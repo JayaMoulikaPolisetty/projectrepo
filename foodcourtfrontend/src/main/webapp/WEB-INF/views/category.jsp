@@ -13,14 +13,12 @@
             <title>Add Categories</title>
             <jsp:include page="header.jsp"></jsp:include>
             
-            
-            
         </head>
         <body>
             <form:form id="catForm" modelAttribute="category" action="catProcess" method="post">
             <div class="table-responsive">
             <center><h2>Category form</h2></center></br>
-                <table align="center" class="table" style = "width:60%">
+                <%-- <table align="center" class="table" style = "width:60%">
                     
                     <tr>
                         <td>
@@ -46,7 +44,27 @@
                     </tr>
                     <tr></tr>
                     
-                </table>
+                </table> --%>
+                
+      <div class="container">
+	   <div class="row">
+		
+		<div class=col-sm-3></div>   
+		<div class="col-sm-6">
+		 	<div class="form-group">
+		      <label for="catName">Category Name:</label>
+		      <form:input path="catName" name="catName" id="catName" class="form-control"/>
+		     </div>
+		    <div class="form-group">
+		      <label for="catDesc">Product Description:</label>
+		       <form:input path="catDesc" name="catDesc" id="catDesc" class="form-control"/>
+		    </div>
+		    
+		    <button type="submit" class="btn btn-default">Add Category</button>
+		    
+		  </div>
+		  </div>
+		  </div>
                 </div>
             </form:form>
             <div class="table-responsive" >
