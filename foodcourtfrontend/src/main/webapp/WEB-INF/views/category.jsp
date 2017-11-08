@@ -56,7 +56,7 @@
 		      <form:input path="catName" name="catName" id="catName" class="form-control"/>
 		     </div>
 		    <div class="form-group">
-		      <label for="catDesc">Product Description:</label>
+		      <label for="catDesc">Category Description:</label>
 		       <form:input path="catDesc" name="catDesc" id="catDesc" class="form-control"/>
 		    </div>
 		    

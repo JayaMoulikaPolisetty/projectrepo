@@ -1,5 +1,4 @@
-<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>  
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +12,7 @@
 </head>
 <body>
 
-<jsp:include page="header.jsp"/>
+
 <style>
 
 
@@ -45,6 +44,9 @@
 
 }
 </style>
+<jsp:include page="header.jsp"/>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>  
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <c:set var="images" value="${contextPath}/resources/carouselPics"/>
 <c:set var="image" value="${contextPath}/resources"/>

@@ -59,11 +59,11 @@ background-attachment: fixed;
 		    </div>
 		    <div class="form-group">
 		      <label for="password">Password:</label>
-		    <form:input path="password" name="password" id="password" class="form-control"/>
+		    <form:input path="password" type="password" id="password" class="form-control"/>
 		    </div>
 		    <div class="form-group">
 		      <label for="password">Confirm Password:</label>
-		       <form:input path="password" name="password" id="password" class="form-control"/>
+		       <form:input path="password" type="password" id="password" class="form-control"/>
 		    </div>
 		    <div class="form-group">
 		      <label for="mobile">Mobile:</label>

@@ -8,6 +8,8 @@ import javax.persistence.Transient;
 
 @Entity
 public class Customer {
+	
+	private static final String DEFAULT_ROLE = "ROLE_USER";
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -19,7 +21,16 @@ public class Customer {
 	private String username;
 	private String password;
 	@Transient 
-	private String comfirmPassword;
+	private String confirmPassword;
+	private String role = DEFAULT_ROLE;
+	
+	
+	public String getRole() {
+		return this.role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
 	public Integer getCustId() {
 		return this.custId;
 	}
@@ -62,11 +73,11 @@ public class Customer {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getComfirmPassword() {
-		return this.comfirmPassword;
+	public String getConfirmPassword() {
+		return this.confirmPassword;
 	}
-	public void setComfirmPassword(String comfirmPassword) {
-		this.comfirmPassword = comfirmPassword;
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 	
 	

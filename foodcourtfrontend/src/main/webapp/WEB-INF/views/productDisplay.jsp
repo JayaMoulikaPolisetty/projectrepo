@@ -37,7 +37,11 @@
             <h3>Cost:</h3><h4>${product.productPrice}</h4>
            
            </div>
-          
+          <div class="col-sm-6">
+             <button class="btn btn-primary col-sm-5">Add to cart </button>
+             <span class="col-sm-2"></span>
+             <button class="btn btn-primary col-sm-5">Buy Now</button>
+          </div>
           </div> 
        
         </div>

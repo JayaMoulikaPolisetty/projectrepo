@@ -15,9 +15,7 @@
             <jsp:include page="header.jsp"></jsp:include>
               <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
               <c:set var="image" value = "${contextPath}/resources" />
-            
-            
-            
+          
         </head>
         <body>
         

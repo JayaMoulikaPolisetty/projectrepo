@@ -86,7 +86,7 @@ public class IndexController {
 	}
 	
 	@RequestMapping(value = "/prodProcess", method = RequestMethod.POST)
-	public ModelAndView addProduct(@ModelAttribute("product") Product product , @RequestParam("pimage") MultipartFile file, Model m, BindingResult result,HttpServletRequest request)
+	public String addProduct(@ModelAttribute("product") Product product , @RequestParam("pimage") MultipartFile file, Model m, BindingResult result,HttpServletRequest request)
 	{
 		
 		productDao.addProduct(product);
@@ -125,7 +125,7 @@ public class IndexController {
 		List<Category> listcategories = categoryDao.retreiveAllCategories();
 		m.addAttribute("catlist", listcategories);
 		
-		return new ModelAndView("product");
+		return "redirect:/product";
 		
 	}
 	
@@ -147,7 +147,7 @@ public class IndexController {
 		categoryDao.addCategory(category);
 		List<Category> listcategories = categoryDao.retreiveAllCategories();
 		m.addAttribute("catlist", listcategories);
-		return "category";
+		return "redirect:/category";
 		
 	}
 	
@@ -169,6 +169,16 @@ public class IndexController {
 		Product product = productDao.getProduct(productId);
 		m.addAttribute(product);
 		return new ModelAndView("productDisplay");
+	}
+	
+	@RequestMapping("/login")
+	public String login(Model m)
+	{
+		List<Category> listcategories = categoryDao.retreiveAllCategories();
+		m.addAttribute("catlist", listcategories);
+		List<Product> listProducts = productDao.retreiveAllProducts();
+		m.addAttribute("prodlist", listProducts);
+		return "login";
 	}
 	
 }
