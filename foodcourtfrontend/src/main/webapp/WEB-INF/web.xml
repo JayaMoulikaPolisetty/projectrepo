@@ -28,4 +28,9 @@
 	    <filter-name>SpringSecurityFilterChain</filter-name>
 	    <url-pattern>/*</url-pattern>
 	  </filter-mapping> -->
+	  
+	  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/dispatcher-servet.xml, /WEB-INF/spring-security.xml</param-value>
+</context-param>
 </web-app>
