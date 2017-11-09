@@ -17,13 +17,13 @@
             <title>Add Products</title>
             <jsp:include page="header.jsp"></jsp:include>
               <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-            
+            <c:set var="image" value="${contextPath}/resources"/>
             
         </head>
         <body>
             <form:form id="prodForm" modelAttribute="product" action="prodProcess" enctype="multipart/form-data" method="post">
             <div class="table-responsive">
-            <center><h2>Products form</h2></center></br>
+            <h2 style = "text-align: center">Products form</h2></br>
        <div class="container">
 	   <div class="row">
 		
@@ -63,8 +63,8 @@
 		  </div>
         </div>
             </form:form>
-            <div class="table-responsive" >
-            <table align="center" class="table table-inverse" style = "width:80%">
+            <%-- <div class="table-responsive" >
+            <table border = "2" align="center" class="table table-inverse" style = "width:80%">
 			<tr>
 			<th>Product Name</th>
 			<th>Product Description</th>
@@ -79,7 +79,20 @@
 			</tr>
 			</c:forEach>
 			</table>
-			</div>
+			</div> --%>
+			<div class="row">
+			<h2 style = "text-align: center">Products List</h2></br>
+				<c:forEach items = "${prodlist}" var="products">
+				  <div class="col-md-3" style="text-align:center">
+				 
+						<a href="${contextPath}/productDisplay/${products.productId}"><img src="${image}/${products.productId}.jpg" class="img-thumbnail">
+						<h3>${products.productName}</h3> </a>
+						<h3>${products.productPrice}</h3>
+					
+				  </div>
+				  </c:forEach>
+				
+				</div>
 			
 	            
         </body>

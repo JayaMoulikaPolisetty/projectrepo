@@ -9,50 +9,21 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Food Court</title>
 
+
 </head>
 <body>
+<%@include file="header.jsp"%>
 
 
-<style>
 
-
-.img-thumbnail
-{
-
-    height:200px;
-	width:200px;
-
-}
-
-.carousel-control
-{
-	height:500px;
-
-}
-
-.carousel-inner >.item > img {
- 
-  height:400px;
-  width:100%;
-  
-}
-
-.c-wrapper {
- 
- width: 70%; 
- margin: auto;
-
-}
-</style>
-<jsp:include page="header.jsp"/>
-<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>  
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <c:set var="images" value="${contextPath}/resources/carouselPics"/>
 <c:set var="image" value="${contextPath}/resources"/>
 
-<div class="c-wrapper">
+
+
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
+<div class="c-wrapper" >
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -87,7 +58,7 @@
     <span class="sr-only">Next</span>
   </a>
  </div>
- 
+
  <div class="container">
  
 				<h3>Featured Products</h3>
@@ -102,10 +73,7 @@
 				  </div>
 				  </c:forEach>
 				
-			</div>
- 			
-		
-		
+				</div>
 </div>
 	 
 	

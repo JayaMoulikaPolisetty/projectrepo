@@ -35,7 +35,7 @@ background-attachment: fixed;
 			</style>
         <body>
             <form:form id="regForm" modelAttribute="customer" action="registerProcess" method="post">
-               <center><h2>Registration form</h2></center></br>
+               <h2 style = "text-align: center">Registration form</h2></br>
 		 <div class="container">
 		 <div class="row">
 		

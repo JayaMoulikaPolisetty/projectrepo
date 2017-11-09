@@ -23,13 +23,18 @@
 		
 		<div class=col-sm-3></div>   
 		<div class="col-sm-6">
+		<h2 style = "text-align: center">Login form</h2></br>
     <label><b>Username</b></label>
     <input type="text" placeholder="Enter Username"class="form-control" name="username" required>
-
+    <br/>
     <label><b>Password</b></label>
     <input type="password" placeholder="Enter Password" class="form-control"name="password" required>
+     <br/>
+    <input type="submit" value="Log In" class="btn btn-primary">
+	<div class="btn-group btn-group-lg">
+	<a href="${contextPath}/register"><button type="button" class="btn btn-info" >Sign Up</button></a>
 
-    <button type="submit" class="btn btn-default">Login</button>
+	</div>
     
   </div>
   </div>

@@ -1,8 +1,38 @@
 
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>  
+<style>
 
 
-        <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+.img-thumbnail
+{
+
+    height:200px;
+	width:200px;
+
+}
+
+.carousel-control
+{
+	height:400px;
+
+}
+
+.carousel-inner >.item > img {
+ 
+  height:400px;
+  width:100%;
+  
+}
+
+.c-wrapper {
+ 
+ width: 70%; 
+ margin: auto;
+
+}
+</style>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -26,6 +56,7 @@
 	  </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
+ 
       <li><a href="${contextPath}/register"><span class="glyphicon glyphicon-user"></span>Register</a></li>
       <li><a href="${contextPath}/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
     </ul>

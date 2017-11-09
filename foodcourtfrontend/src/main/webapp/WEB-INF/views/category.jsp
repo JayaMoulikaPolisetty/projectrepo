@@ -68,7 +68,7 @@
                 </div>
             </form:form>
             <div class="table-responsive" >
-            <table align="center" class="table table-inverse" style = "width:80%">
+            <table border="2" align="center" class="table table-inverse" style = "width:70%">
 			<tr>
 			<th>Category Name</th>
 			<th>Category Description</th>
