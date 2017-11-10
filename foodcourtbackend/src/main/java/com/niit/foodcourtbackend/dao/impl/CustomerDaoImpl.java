@@ -24,7 +24,7 @@ public class CustomerDaoImpl implements CustomerDao{
 		
 		try {
 			
-			sessionFactory.getCurrentSession().save(customer);
+			sessionFactory.getCurrentSession().persist(customer);
 			return true;
 		}
 		catch(Exception e)

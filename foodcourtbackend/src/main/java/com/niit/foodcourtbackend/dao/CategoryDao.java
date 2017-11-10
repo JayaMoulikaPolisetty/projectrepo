@@ -10,8 +10,12 @@ import com.niit.foodcourtbackend.Category;
 public interface CategoryDao {
 
 	boolean addCategory(Category category);
+
 	boolean deletCategory(Category category);
+
 	boolean updateCategory(Category category);
+
 	Category getCategory(Integer id);
+
 	List<Category> retreiveAllCategories();
 }

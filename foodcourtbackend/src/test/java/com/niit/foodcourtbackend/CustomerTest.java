@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.niit.foodcourtbackend.configuration.HibernateConfiguration;
+import com.niit.foodcourtbackend.dao.CartDao;
 import com.niit.foodcourtbackend.dao.CustomerDao;
 
 public class CustomerTest {
@@ -19,7 +20,9 @@ public class CustomerTest {
 	   
 	AnnotationConfigApplicationContext context;
 	CustomerDao customerDao;
+	CartDao cartDao;
 	Customer customer;
+	Cart cart;
 	
 	
 	
@@ -31,6 +34,8 @@ public class CustomerTest {
 		context.refresh();
 		customerDao=(CustomerDao)context.getBean("customerDao");
 		customer=new Customer();
+		cartDao=(CartDao)context.getBean("cartDao");
+		cart=new Cart();
 	
 	}
 	
@@ -42,12 +47,16 @@ public class CustomerTest {
 		customer.setMobile(" 9177569932");
 		customer.setUsername("Manu");;
 		customer.setPassword("manu123");
-		customer.setComfirmPassword("manu123");
+		customer.setConfirmPassword("manu123");
+		
+		cart.setCustomer(customer);
+		customer.setCart(cart);
 		
 		
-		Assert.assertEquals("Customer added successfully", true, customerDao.addCustomer(customer) );
-	}*/
-	
+		Assert.assertEquals("Customer added successfully", true, customerDao.addCustomer(customer));
+		Assert.assertEquals("cart added", true, cartDao.addCart(cart));
+	}
+	*/
 	/*@Test
 	public void test() {
 		
@@ -58,11 +67,19 @@ public class CustomerTest {
 	/*@Test
 	public void test() {
 		
-		  customer= customerDao.getCustomer(33);
+		  customer= customerDao.getCustomer(2);
 		  customer.setAddress("Hyderabad");
 		  assertEquals("update successful",true,customerDao.updateCustomer(customer));
+	}*/
+	
+	@Test
+	public void cartUpdateTest() {
+		cart= cartDao.getCart(1);
+		cart.setCartQuantity(5);
+		assertEquals("update successful",true,cartDao.updateCart(cart));
 	}
-	*/
+	
+	
 /*@Test
 	public void test() {
 		

@@ -61,6 +61,11 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<label for="stock">Stock</label>
+							<form:input path="stock" name="stock"
+								id="stock" class="form-control" />
+						</div>
+						<div class="form-group">
 							<label for="pimage">Upload Image:</label>
 							<form:input path="pimage" type="file" class="form-control" />
 
@@ -80,6 +85,7 @@
 				<th style="text-align:center">Product Name</th>
 				<th style="text-align:center">Product Description</th>
 				<th style="text-align:center">Price</th>
+				<th style="text-align:center">Stock</th>
 				<th style="text-align:center">Edit Product</th>
 				<th style="text-align:center">Delete Product</th>
 			</tr>
@@ -90,7 +96,7 @@
 						href="${contextPath}/productDisplay/${products.productId}">${products.productName}</a></td>
 					<td>${products.productDesc}</td>
 					<td>${products.productPrice}</td>
-
+					<td>${products.stock}</td>
 
 					<td><a href="${contextPath}/updateProduct/${products.productId}"><button
 								type="button" class="btn btn-primary">Edit</button></a></td>

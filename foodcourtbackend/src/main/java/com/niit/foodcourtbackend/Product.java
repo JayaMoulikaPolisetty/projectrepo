@@ -23,6 +23,11 @@ public class Product implements Serializable{
 	private String productName;
 	private String productDesc;
 	private double productPrice;
+	private int stock;
+	
+	@OneToOne(mappedBy = "product")
+	private CartItems cartItems;
+	
 	
 	@OneToOne 
 	private Category category;
@@ -66,6 +71,12 @@ public class Product implements Serializable{
 	}
 	public void setProductPrice(double productPrice) {
 		this.productPrice = productPrice;
+	}
+	public int getStock() {
+		return this.stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 	
 	
