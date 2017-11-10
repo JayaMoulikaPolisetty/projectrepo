@@ -89,13 +89,20 @@ public class IndexController {
 	public String addProduct(@ModelAttribute("product") Product product , @RequestParam("pimage") MultipartFile file, Model m, BindingResult result,HttpServletRequest request)
 	{
 		
-		productDao.addProduct(product);
+		
+		System.err.println("productId" +product.getProductId());
+		
+		if(product.getProductId() != 0) 
+		{
+			productDao.updateProduct(product);
+		}
+		else
+			productDao.addProduct(product);
+		
 		
 	    String path = request.getServletContext().getRealPath("/resources/");
 		
 		String totalFilewithPath = path+String.valueOf(product.getProductId())+".jpg";
-		
-		System.out.println(totalFilewithPath);
 		
 		File productImage = new File(totalFilewithPath);
 		
@@ -143,8 +150,15 @@ public class IndexController {
 	@RequestMapping(value = "/catProcess", method = RequestMethod.POST)
 	public String addCategory(@ModelAttribute("category") Category category, Model m)
 	{
+		System.err.println("catId" +category.getCatId());
 		
+		if(category.getCatId() != 0)
+		{
+			categoryDao.updateCategory(category);
+		}
+		else
 		categoryDao.addCategory(category);
+		
 		List<Category> listcategories = categoryDao.retreiveAllCategories();
 		m.addAttribute("catlist", listcategories);
 		return "redirect:/category";
@@ -180,5 +194,55 @@ public class IndexController {
 		m.addAttribute("prodlist", listProducts);
 		return "login";
 	}
+	
+	 @RequestMapping(value="updateProduct/{productId}")
+	 public ModelAndView editProduct(@PathVariable("productId") int productId, Model m)
+	 {
+		 Product product = productDao.getProduct(productId );
+		 m.addAttribute("product", product);
+		 List<Category> listcategories = categoryDao.retreiveAllCategories();
+		 m.addAttribute("catlist", listcategories);
+		 List<Product> listProducts = productDao.retreiveAllProducts();
+		 m.addAttribute("prodlist", listProducts);
+		 return new ModelAndView("product");
+	 }
+	 
+	 @RequestMapping(value="deleteProduct/{productId}")
+	 public ModelAndView deleteProduct(@PathVariable("productId") int productId, Model m)
+	 {
+		 Product p= productDao.getProduct(productId);
+		 productDao.deleteProduct(p);
+		 Product product = new Product();
+		 m.addAttribute("product", product);
+		 List<Category> listcategories = categoryDao.retreiveAllCategories();
+		 m.addAttribute("catlist", listcategories);
+		 List<Product> listProducts = productDao.retreiveAllProducts();
+		 m.addAttribute("prodlist", listProducts);
+		 return new ModelAndView("product");
+	 }
+	 
+	 @RequestMapping(value="updateCategory/{catId}")
+	 public ModelAndView updateCategory(@PathVariable("catId") int catId, Model m) 
+	 {
+		 Category c = categoryDao.getCategory(catId);
+		 m.addAttribute("category", c);
+		 List<Category> listcategories = categoryDao.retreiveAllCategories();
+		 m.addAttribute("catlist", listcategories);
+		 return new ModelAndView("category");
+	 }
+	 
+	 @RequestMapping(value="deleteCategory/{catId}")
+	 public ModelAndView deleteCategory(@PathVariable("catId") int catId, Model m)
+	 {
+		 
+		 Category c = categoryDao.getCategory(catId);
+		 categoryDao.deletCategory(c);
+		 Category category = new Category();
+		 m.addAttribute(category);
+		 List<Category> listcategories = categoryDao.retreiveAllCategories();
+		 m.addAttribute("catlist", listcategories);
+		 return new ModelAndView("category");
+	 }
+	 
 	
 }

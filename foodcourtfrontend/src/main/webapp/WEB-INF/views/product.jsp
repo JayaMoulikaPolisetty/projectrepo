@@ -24,7 +24,7 @@
 
 </head>
 <body>
-	<form:form id="prodForm" modelAttribute="product" action="prodProcess"
+	<form:form id="prodForm" modelAttribute="product" action="${contextPath}/prodProcess"
 		enctype="multipart/form-data" method="post">
 		<div class="table-responsive">
 			<h2 style="text-align: center">Products form</h2>
@@ -35,6 +35,7 @@
 					<div class=col-sm-3></div>
 					<div class="col-sm-6">
 						<div class="form-group">
+						    <form:input type="hidden" path="productId"/>
 							<label for="productName">Product Name:</label>
 							<form:input path="productName" name="productName" id="firstName"
 								class="form-control" />
@@ -72,24 +73,34 @@
 			</div>
 		</div>
 	</form:form>
-	<%-- <div class="table-responsive" >
-            <table border = "2" align="center" class="table table-inverse" style = "width:80%">
+	<div class="table-responsive">
+		<table border="2" align="center" class="table table-inverse"
+			style="width: 80%">
 			<tr>
-			<th>Product Name</th>
-			<th>Product Description</th>
-			<th>Price</th>
+				<th style="text-align:center">Product Name</th>
+				<th style="text-align:center">Product Description</th>
+				<th style="text-align:center">Price</th>
+				<th style="text-align:center">Edit Product</th>
+				<th style="text-align:center">Delete Product</th>
 			</tr>
-			<c:forEach items = "${prodlist}" var="products">
-			
-			<tr>
-			<td><a href="${contextPath}/productDisplay/${products.productId}">${products.productName}</a></td>
-			<td>${products.productDesc}</td>
-			<td>${products.productPrice}</td>
-			</tr>
+			<c:forEach items="${prodlist}" var="products">
+
+				<tr style="text-align:center">
+					<td><a
+						href="${contextPath}/productDisplay/${products.productId}">${products.productName}</a></td>
+					<td>${products.productDesc}</td>
+					<td>${products.productPrice}</td>
+
+
+					<td><a href="${contextPath}/updateProduct/${products.productId}"><button
+								type="button" class="btn btn-primary">Edit</button></a></td>
+					<td><a href="${contextPath}/deleteProduct/${products.productId}"><button
+								type="button" class="btn btn-danger">Delete</button></a></td>
+				</tr>
 			</c:forEach>
-			</table>
-			</div> --%>
-	<div class="row">
+		</table>
+	</div>
+	<%-- <div class="row">
 		<h2 style="text-align: center">Products List</h2>
 		</br>
 		<c:forEach items="${prodlist}" var="products">
@@ -99,11 +110,13 @@
 					src="${image}/${products.productId}.jpg" class="img-thumbnail">
 					<h3>${products.productName}</h3> </a>
 				<h3>${products.productPrice}</h3>
+				<c:url value="updateProduct/${products.productId}">Update</c:url>
+				<c:url value="deleteProduct/${products.productId}">Update</c:url>
 
 			</div>
 		</c:forEach>
 
-	</div>
+	</div> --%>
 
 
 </body>

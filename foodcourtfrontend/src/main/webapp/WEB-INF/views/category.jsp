@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <%@ page language="java" contentType="text/html;"%>
 <html>
 <head>
@@ -18,7 +19,7 @@
 
 </head>
 <body>
-	<form:form id="catForm" modelAttribute="category" action="catProcess"
+	<form:form id="catForm" modelAttribute="category" action="${contextPath}/catProcess"
 		method="post">
 		<div class="table-responsive">
 			<center>
@@ -59,6 +60,7 @@
 					<div class=col-sm-3></div>
 					<div class="col-sm-6">
 						<div class="form-group">
+							<form:input path="catId" type="hidden" />
 							<label for="catName">Category Name:</label>
 							<form:input path="catName" name="catName" id="catName"
 								class="form-control" />
@@ -83,6 +85,8 @@
 			<tr>
 				<th>Category Name</th>
 				<th>Category Description</th>
+				<th>Edit Category</th>
+				<th>Delete Category</th>
 
 			</tr>
 			<c:forEach items="${catlist}" var="cat">
@@ -90,6 +94,12 @@
 				<tr>
 					<td>${cat.catName}</td>
 					<td>${cat.catDesc}</td>
+					<td><a href="${contextPath}/updateCategory/${cat.catId}"><button
+								type="button" class="btn btn-primary">Edit</button></a></td>
+					<td><a href="${contextPath}/deleteCategory/${cat.catId}"><button
+								type="button" class="btn btn-danger">Delete</button></a></td>
+					
+
 				</tr>
 			</c:forEach>
 		</table>
