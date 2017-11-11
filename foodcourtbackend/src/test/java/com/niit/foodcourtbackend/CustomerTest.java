@@ -72,12 +72,12 @@ public class CustomerTest {
 		  assertEquals("update successful",true,customerDao.updateCustomer(customer));
 	}*/
 	
-	@Test
+	/*@Test
 	public void cartUpdateTest() {
 		cart= cartDao.getCart(1);
 		cart.setCartQuantity(5);
 		assertEquals("update successful",true,cartDao.updateCart(cart));
-	}
+	}*/
 	
 	
 /*@Test

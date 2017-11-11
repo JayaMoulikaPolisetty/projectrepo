@@ -45,6 +45,14 @@ public class Cart {
 		return this.totalCartPrice;
 	}
 
+	public List<CartItems> getCartItems() {
+		return this.cartItems;
+	}
+
+	public void setCartItems(List<CartItems> cartItems) {
+		this.cartItems = cartItems;
+	}
+
 	public void setTotalCartPrice(double totalCartPrice) {
 		this.totalCartPrice = totalCartPrice;
 	}

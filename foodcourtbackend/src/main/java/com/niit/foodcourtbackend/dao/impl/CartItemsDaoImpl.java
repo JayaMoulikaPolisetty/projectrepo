@@ -17,7 +17,14 @@ public class CartItemsDaoImpl implements CartItemsDao{
 	@Override
 	public boolean addCartItems(CartItems cartItems) {
 		
-		return false;
+		try {
+			sessionFactory.getCurrentSession().persist(cartItems);
+		return true;
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e);
+			return false;
+		}
 	}
 
 	@Override

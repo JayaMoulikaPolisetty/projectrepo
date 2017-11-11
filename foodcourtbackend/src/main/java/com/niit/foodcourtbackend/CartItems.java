@@ -18,6 +18,46 @@ public class CartItems {
 	
 	private int cartItemQuantity;
 	
+	public int getCartItemId() {
+		return this.cartItemId;
+	}
+
+	public void setCartItemId(int cartItemId) {
+		this.cartItemId = cartItemId;
+	}
+
+	public double getCartItemPrice() {
+		return this.cartItemPrice;
+	}
+
+	public void setCartItemPrice(double cartItemPrice) {
+		this.cartItemPrice = cartItemPrice;
+	}
+
+	public int getCartItemQuantity() {
+		return this.cartItemQuantity;
+	}
+
+	public void setCartItemQuantity(int cartItemQuantity) {
+		this.cartItemQuantity = cartItemQuantity;
+	}
+
+	public Cart getCart() {
+		return this.cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
+
+	public Product getProduct() {
+		return this.product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
 	@ManyToOne
 	private Cart cart;
 	
