@@ -14,6 +14,7 @@ public interface CustomerDao {
 	boolean deleteCustomer(Customer customer);
 	boolean updateCustomer(Customer customer);
 	Customer getCustomer(Integer id);
+	Customer getCustomerDetails(String name);
 	List<Customer> retreiveAllCustomers();
 	
 	}

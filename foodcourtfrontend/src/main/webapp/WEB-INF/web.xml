@@ -19,18 +19,25 @@
    </servlet-mapping>
 
 
-	<!-- <filter>
-	    <filter-name>SpringSecurityFilterChain</filter-name>
+	 <filter>
+	    <filter-name>springSecurityFilterChain</filter-name>
 	    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 	  </filter>
 	
 	  <filter-mapping>
-	    <filter-name>SpringSecurityFilterChain</filter-name>
+	    <filter-name>springSecurityFilterChain</filter-name>
 	    <url-pattern>/*</url-pattern>
-	  </filter-mapping> -->
-	  
-	  <context-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>/WEB-INF/dispatcher-servet.xml, /WEB-INF/spring-security.xml</param-value>
-</context-param>
+	  </filter-mapping> 
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/dispatcher-servlet.xml, 
+		/WEB-INF/spring-security.xml,
+		/WEB-INF/applicationContext.xml
+		</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 </web-app>

@@ -19,7 +19,7 @@
 
 </head>
 <body>
-	<form:form id="catForm" modelAttribute="category" action="${contextPath}/catProcess"
+	<form:form id="catForm" modelAttribute="category" action="${contextPath}/admin/catProcess"
 		method="post">
 		<div class="table-responsive">
 			<center>
@@ -94,9 +94,9 @@
 				<tr>
 					<td>${cat.catName}</td>
 					<td>${cat.catDesc}</td>
-					<td><a href="${contextPath}/updateCategory/${cat.catId}"><button
+					<td><a href="${contextPath}/admin/updateCategory/${cat.catId}"><button
 								type="button" class="btn btn-primary">Edit</button></a></td>
-					<td><a href="${contextPath}/deleteCategory/${cat.catId}"><button
+					<td><a href="${contextPath}/admin/deleteCategory/${cat.catId}"><button
 								type="button" class="btn btn-danger">Delete</button></a></td>
 					
 

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.foodcourtbackend.CartItems;
+import com.niit.foodcourtbackend.Category;
 import com.niit.foodcourtbackend.dao.CartItemsDao;
 
 @Repository("cartItemsDao")
@@ -29,20 +30,39 @@ public class CartItemsDaoImpl implements CartItemsDao{
 
 	@Override
 	public boolean deletCartItems(CartItems cartItems) {
-		// TODO Auto-generated method stub
-		return false;
+		try
+		{
+			sessionFactory.getCurrentSession().remove(cartItems);
+			return true;
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+		 
 	}
 
 	@Override
 	public boolean updateCartItems(CartItems cartItems) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+
+			sessionFactory.getCurrentSession().update(cartItems);
+			return true;
+
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	@Override
 	public CartItems getCartItems(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return sessionFactory.getCurrentSession().get(CartItems.class, id);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
 	}
 
 }

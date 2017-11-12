@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class HibernateConfiguration {
  
 	//DataSource bean is created
-	@Bean
+	@Bean(name={"dataSource"})
 	public DataSource getdataSource()
 	{
 		BasicDataSource datasource = new BasicDataSource();

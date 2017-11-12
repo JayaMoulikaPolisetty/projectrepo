@@ -72,9 +72,10 @@ body {
 					</div>
 					<div class="form-group">
 						<label for="password">Confirm Password:</label>
-						<form:input path="password" type="password" id="password"
+						<form:input path="confirmPassword" type="password" id="confirmPassword"
 							class="form-control" />
 					</div>
+					<form:input path="is_Active" hidden="true" value="TRUE"/>
 					<div class="form-group">
 						<label for="mobile">Mobile:</label>
 						<form:input path="mobile" name="mobile" id="mobile"

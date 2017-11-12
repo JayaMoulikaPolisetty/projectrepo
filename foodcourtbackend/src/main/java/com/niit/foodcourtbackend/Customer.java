@@ -9,11 +9,11 @@ import javax.persistence.Transient;
 
 @Entity
 public class Customer {
-	
+
 	private static final String DEFAULT_ROLE = "ROLE_USER";
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer custId;
 	private String firstName;
 	private String lastName;
@@ -21,73 +21,100 @@ public class Customer {
 	private String address;
 	private String username;
 	private String password;
-	@Transient 
+	@Transient
 	private String confirmPassword;
+	private boolean is_Active;
+
 	private String role = DEFAULT_ROLE;
-	@OneToOne(mappedBy= "customer")
+	@OneToOne(mappedBy = "customer")
 	private Cart cart;
-	
-	
+
 	public String getRole() {
 		return this.role;
 	}
+
 	public Cart getCart() {
 		return this.cart;
 	}
+
 	public void setCart(Cart cart) {
 		this.cart = cart;
 	}
+
 	public void setRole(String role) {
 		this.role = role;
 	}
+
 	public Integer getCustId() {
 		return this.custId;
 	}
+
 	public void setCustId(Integer custId) {
 		this.custId = custId;
 	}
+
 	public String getFirstName() {
 		return this.firstName;
 	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
 	public String getLastName() {
 		return this.lastName;
 	}
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
 	public String getMobile() {
 		return this.mobile;
 	}
+
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
+
 	public String getAddress() {
 		return this.address;
 	}
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 	public String getUsername() {
 		return this.username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	public String getPassword() {
 		return this.password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public String getConfirmPassword() {
 		return this.confirmPassword;
 	}
+
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
-	
-	
+
+	public boolean isIs_Active() {
+		return this.is_Active;
+	}
+
+	public void setIs_Active(boolean is_Active) {
+		this.is_Active = is_Active;
+	}
+
 }

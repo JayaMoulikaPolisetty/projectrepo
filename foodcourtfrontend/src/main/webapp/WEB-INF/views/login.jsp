@@ -18,7 +18,7 @@
 
 	<jsp:include page="header.jsp" />
 
-	<form action="/login" method="post">
+	<form action="" method="post">
 
 
 		<div class="container">
