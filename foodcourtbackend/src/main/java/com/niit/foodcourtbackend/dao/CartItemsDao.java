@@ -1,6 +1,10 @@
 package com.niit.foodcourtbackend.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.niit.foodcourtbackend.CartItems;
+import com.niit.foodcourtbackend.Product;
 
 public interface CartItemsDao {
 
@@ -11,4 +15,6 @@ public interface CartItemsDao {
 	boolean updateCartItems(CartItems cartItems);
 
 	CartItems getCartItems(Integer id);
+	
+	ArrayList<CartItems> retreiveAllCartItems();
 }

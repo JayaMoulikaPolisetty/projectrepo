@@ -1,5 +1,9 @@
 package com.niit.foodcourtbackend.dao.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -7,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.foodcourtbackend.CartItems;
 import com.niit.foodcourtbackend.Category;
+import com.niit.foodcourtbackend.Product;
 import com.niit.foodcourtbackend.dao.CartItemsDao;
 
 @Repository("cartItemsDao")
@@ -64,5 +69,19 @@ public class CartItemsDaoImpl implements CartItemsDao{
 			return null;
 		}
 	}
+
+	@Override
+	public ArrayList<CartItems> retreiveAllCartItems() {
+		try {
+
+			return (ArrayList<CartItems>) sessionFactory.getCurrentSession().createQuery("from CartItems", CartItems.class).getResultList();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+
+	
 
 }

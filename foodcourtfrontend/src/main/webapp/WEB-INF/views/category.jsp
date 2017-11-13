@@ -19,8 +19,8 @@
 
 </head>
 <body>
-	<form:form id="catForm" modelAttribute="category" action="${contextPath}/admin/catProcess"
-		method="post">
+	<form:form id="catForm" modelAttribute="category"
+		action="${contextPath}/admin/catProcess" method="post">
 		<div class="table-responsive">
 			<center>
 				<h2>Category form</h2>
@@ -63,7 +63,7 @@
 							<form:input path="catId" type="hidden" />
 							<label for="catName">Category Name:</label>
 							<form:input path="catName" name="catName" id="catName"
-								class="form-control" />
+								required="true" pattern="[a-zA-Z0-9]{4,50}" class="form-control" />
 						</div>
 						<div class="form-group">
 							<label for="catDesc">Category Description:</label>
@@ -98,11 +98,12 @@
 								type="button" class="btn btn-primary">Edit</button></a></td>
 					<td><a href="${contextPath}/admin/deleteCategory/${cat.catId}"><button
 								type="button" class="btn btn-danger">Delete</button></a></td>
-					
+
 
 				</tr>
 			</c:forEach>
 		</table>
 	</div>
 </body>
+<%@include file="footer.jsp"%>
 </html>

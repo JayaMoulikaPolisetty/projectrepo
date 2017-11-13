@@ -1,6 +1,7 @@
 package com.niit.foodcourtbackend;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -61,7 +62,7 @@ public class CartItems {
 	@ManyToOne
 	private Cart cart;
 	
-	@OneToOne
+	@OneToOne(fetch=FetchType.EAGER)
 	private Product product;
 
 }

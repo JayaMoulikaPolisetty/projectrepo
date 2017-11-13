@@ -19,34 +19,49 @@
         </head>
         <body>
         
-        <style>
-
-
-			.img-thumbnail
-			{
-			
-			    height:300px;
-				width:300px;
-			
-			}
-			
-		</style>
+        
 		<div class="container">
-		<div class="col-md-2"></div>
-		<div class="col-md-8">
-        <div class="row">
+		<div class="row">
+			<div class="col-md-2">
+
+				<h2 style="text-align: center">Categories</h2>
+				</br>
+				<ul class="list-group">
+					<c:forEach items="${catlist}" var="cat">
+
+						<li class="list-group-item"><a
+							href="${contextPath}/CategorizedProducts/${cat.catId}">${cat.catName}</a></li>
+					</c:forEach>
+
+				</ul>
+
+			</div>
+		<div class="col-md-10">
+        
 				<c:forEach items = "${catprodlist}" var="products">
-				  <div class="col-md-6" style="text-align:center">
+				  <%--  <div class="col-md-6" style="text-align:center">
 				 
 						<a href="${contextPath}/productDisplay/${products.productId}"><img src="${image}/${products.productId}.jpg" class="img-thumbnail"></a>
 						<h3>${products.productName}</h3> 
 						<h3>${products.productPrice}</h3>
 					
-				  </div>
+				  </div> --%>
+				  	
+					<div class="col-sm-4" style="text-align: center">
+
+						<a href="${contextPath}/productDisplay/${products.productId}"><img
+							src="${image}/${products.productId}.jpg" class="img-thumbnail">
+							<h3>${products.productName}</h3> </a>
+						<h3>${products.productPrice}</h3>
+
+					</div>
+			
+				  
 				  </c:forEach>
 		</div>
 		</div>
 		</div>
        
         </body>
+        <%@include file="footer.jsp"%>
         </html>

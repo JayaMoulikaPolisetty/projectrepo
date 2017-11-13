@@ -59,13 +59,14 @@
 		</a>
 	</div>
 
+    <c:forEach items="${catlist}" var = "cat" begin="0" end="2">
 	<div class="container">
 
-		<h3>Featured Products</h3>
+		<h3>${cat.catName}</h3>
 
 		<div class="row">
-			<c:forEach items="${prodlist}" var="products">
-				<div class="col-md-3" style="text-align: center">
+			<c:forEach items="${cat.products}" var="products" begin="0" end = "3">
+			<div class="col-md-3" style="text-align: center">
 
 					<a href="${contextPath}/productDisplay/${products.productId}"><img
 						src="${image}/${products.productId}.jpg" class="img-thumbnail"></a>
@@ -76,7 +77,9 @@
 
 		</div>
 	</div>
+	</c:forEach>
 
-<%@include file="footer.jsp"%>
+
 </body>
+<%@include file="footer.jsp"%>
 </html>

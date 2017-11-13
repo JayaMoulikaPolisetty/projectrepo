@@ -21,6 +21,8 @@
 	width: 70%;
 	margin: auto;
 }
+
+
 </style>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
@@ -36,19 +38,24 @@
 				<li><a href="${contextPath}/admin/product">Product
 						Operations</a></li>
 
-				<li><a href="${contextPath}/admin/category">Category Operations</a></li>
+				<li><a href="${contextPath}/admin/category">Category
+						Operations</a></li>
 			</security:authorize>
 			<security:authorize access="!hasAuthority('ROLE_ADMIN')">
-			<li><a href="${contextPath}/products">Products</a></li>
-			
-			<li><a href="${contextPath}/category" />Categories</a>
-				<ul class="dropdown-menu">
-					<c:forEach items="${catlist}" var="cat">
-						<li><a href="${contextPath}/CategorizedProducts/${cat.catId}">${cat.catName}</a></li>
-					</c:forEach>
+				<li><a href="${contextPath}/products">Products</a></li>
 
-				</ul></li>
-			</security:authorize>
+				<li><a href="${contextPath}/category" class="dropdown-toggle"
+					data-toggle="dropdown">Categories<b class="caret"></b></a> 
+					<ul class="dropdown-menu">
+					<c:forEach
+						items="${catlist}" var="cat">
+         <li><a href="${contextPath}/CategorizedProducts/${cat.catId}">${cat.catName}</a></li>
+       </c:forEach>
+       </ul>
+			 </li>
+		</ul>
+		
+		</security:authorize>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<security:authorize access="isAnonymous()">
@@ -59,6 +66,7 @@
 			</security:authorize>
 
 			<security:authorize access="isAuthenticated()">
+			<li><a href="${contextPath}/customer/myCart">My Cart</a></li>
 				<li id="logout"><a href="${contextPath}/perform_logout"><span
 						class="glyphicon glyphicon-user"></span>Logout</a></li>
 			</security:authorize>

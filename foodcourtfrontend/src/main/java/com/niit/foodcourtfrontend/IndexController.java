@@ -48,6 +48,7 @@ public class IndexController {
 	
 	@RequestMapping("/")
 	public ModelAndView index(Model m,Principal principal) {
+		
 		if(principal!=null)
 		{
 			System.out.println(principal.getName());
@@ -60,6 +61,7 @@ public class IndexController {
 		m.addAttribute("catlist", listcategories);
 		List<Product> listProducts = productDao.retreiveAllProducts();
 		m.addAttribute("prodlist", listProducts);
+	
 		return new ModelAndView("index");
 	}
 

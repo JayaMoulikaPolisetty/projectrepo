@@ -24,44 +24,46 @@
 </head>
 
 
-<div class="container">
-	<div class="row">
-		<div class="col-sm-6">
-
-			
-			<h2 style = "text-align: center">${product.productName}</h2>
-			
-			<img src="${images}/${product.productId}.jpg" class="img-responsive"
-				alt="${product.productName}">
-
-
-
-		</div>
-		<div class="col-sm-6">
-			<br />
-			<br />
-			<h3>Description:</h3>
-			${product.productDesc}
-			<h3>Cost:</h3>
-			<h4>${product.productPrice}</h4>
-			
-			
-		</div>
-		<div class="col-sm-6">
-		<security:authorize access="!hasAuthority('ROLE_ADMIN')">
-		<form action = "${contextPath}/customer/addToCart/${product.productId}">
-		    <h4>Enter Quantity</h4>
-		    <input type ="number" class= "form-control"name="quantity">
-			<button class="btn btn-primary col-sm-5">Add to cart</button>
-		</form>
-			</security:authorize>
-		</div>
-	</div>
-
-</div>
 
 <body>
 
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6">
+
+
+				<h2 style="text-align: center">${product.productName}</h2>
+
+				<img src="${images}/${product.productId}.jpg" class="img-responsive"
+					alt="${product.productName}">
+
+
+
+			</div>
+			<div class="col-sm-6">
+				<br /> <br />
+				<h3>Description:</h3>
+				${product.productDesc}
+				<h3>Cost:</h3>
+				<h4 style="color: black">${product.productPrice}</h4>
+
+
+			</div>
+			<div class="col-sm-6">
+				<security:authorize access="!hasAuthority('ROLE_ADMIN')">
+					<form
+						action="${contextPath}/customer/addToCart/${product.productId}">
+						<h4>Enter Quantity</h4>
+						<input type="number" class="form-control" name="quantity">
+						<br/>
+						<button class="btn btn-primary col-sm-5">Add to cart</button>
+					</form>
+				</security:authorize>
+			</div>
+		</div>
+
+	</div>
 
 </body>
+<%@include file="footer.jsp"%>
 </html>

@@ -1,5 +1,6 @@
 package com.niit.foodcourtfrontend;
 
+import java.util.List;
 import java.security.Principal;
 import java.util.ArrayList;
 
@@ -55,7 +56,22 @@ public class CustomerController {
 		
 		cartItemsDao.addCartItems(cartItems);
 		cartDao.updateCart(cart);
-		
+		m.addAttribute("cartItems",itemsList);
+		m.addAttribute(product);
+		m.addAttribute(cart);
 		return "redirect:/products";
 	}
+	
+	@RequestMapping("myCart")
+	public String myCart(Model m, Principal principal)
+	{
+		Customer customer=customerDao.getCustomerDetails(principal.getName());
+		Cart cart = customer.getCart();
+		List<CartItems> cartItems = cart.getCartItems();
+		
+		m.addAttribute("cartItems",cartItems);
+		m.addAttribute(cart);
+		return "myCart";
+	}
+	
 }

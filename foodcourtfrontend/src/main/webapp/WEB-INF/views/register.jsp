@@ -15,29 +15,13 @@
 <title>Registration</title>
 
 <jsp:include page="header.jsp"></jsp:include>
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<c:set var="images" value="${contextPath}/resources" />
-
 
 </head>
-<style>
-/* body {
-  					  background-image: url("${images}/background1.jpg");
-				} */
-body {
-	background-image: url(${images}/background1.jpg);
-	/*You will specify your image path here.*/
-	-moz-background-size: cover;
-	-webkit-background-size: cover;
-	background-size: cover;
-	background-position: top center !important;
-	background-repeat: no-repeat !important;
-	background-attachment: fixed;
-}
-</style>
+
 <body>
 	<form:form id="regForm" modelAttribute="customer"
-		action="registerProcess" method="post">
+		action="registerProcess" method="post"
+		onsubmit="return validateConPass()">
 		<h2 style="text-align: center">Registration form</h2>
 		</br>
 		<div class="container">
@@ -48,38 +32,40 @@ body {
 					<div class="form-group">
 						<label for="firstName">First Name:</label>
 						<form:input path="firstName" name="firstName" id="firstName"
-							class="form-control" />
+							required="true" pattern="[a-zA-Z]{4,12}" class="form-control" title="min 4 max 12 char" />
 					</div>
 					<div class="form-group">
 						<label for="lastName">Last Name:</label>
 						<form:input path="lastName" name="lastName" id="lastName"
-							class="form-control" />
+							required="true" pattern="[a-zA-Z]{4,12}" class="form-control" title="min 4 max 12 char"/>
 					</div>
 					<div class="form-group">
 						<label for="address">Address:</label>
 						<form:input path="address" name="address" id="address"
-							class="form-control" />
+							required="true" class="form-control" />
 					</div>
 					<div class="form-group">
 						<label for="username">Username:</label>
 						<form:input path="username" name="username" id="username"
-							class="form-control" />
+							required="true" pattern="[a-zA-Z]{4,12}" class="form-control" title="min-4 max-12 char"/>
 					</div>
 					<div class="form-group">
 						<label for="password">Password:</label>
 						<form:input path="password" type="password" id="password"
-							class="form-control" />
+							required="true" pattern="[a-zA-Z0-9]{8,12}" class="form-control" title="min-8 max-12 char"/>
 					</div>
 					<div class="form-group">
 						<label for="password">Confirm Password:</label>
-						<form:input path="confirmPassword" type="password" id="confirmPassword"
+						<form:input path="confirmPassword" type="password"
+							id="confirmPassword" required="true" pattern="[a-zA-Z0-9]{8,12}" title="min-4 max-12 char"
 							class="form-control" />
 					</div>
-					<form:input path="is_Active" hidden="true" value="TRUE"/>
+					<div id="passerror" style="color: red"></div>
+					<form:input path="is_Active" hidden="true" value="TRUE" />
 					<div class="form-group">
 						<label for="mobile">Mobile:</label>
 						<form:input path="mobile" name="mobile" id="mobile"
-							class="form-control" />
+							required="true" pattern="[0-9]{10,10}" class="form-control"/>
 					</div>
 					<button type="submit" class="btn btn-default">Register</button>
 
@@ -88,5 +74,19 @@ body {
 		</div>
 
 	</form:form>
+
+	<script type="text/javascript">
+		function validateConPass() {
+			if (document.getElementById("password").value != document
+					.getElementById("confirmPassword").value) {
+				document.getElementById("passerror").innerHTML = "password and confirm password should be same";
+				return false;
+			} else {
+				return true;
+			}
+		}
+	</script>
+
 </body>
+<%@include file="footer.jsp"%>
 </html>
