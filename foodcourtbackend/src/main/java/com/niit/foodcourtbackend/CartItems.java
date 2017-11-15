@@ -19,6 +19,13 @@ public class CartItems {
 	
 	private int cartItemQuantity;
 	
+	@ManyToOne
+	private Cart cart;
+	
+	@OneToOne(fetch=FetchType.EAGER)
+	private Product product;
+
+	
 	public int getCartItemId() {
 		return this.cartItemId;
 	}
@@ -59,10 +66,5 @@ public class CartItems {
 		this.product = product;
 	}
 
-	@ManyToOne
-	private Cart cart;
 	
-	@OneToOne(fetch=FetchType.EAGER)
-	private Product product;
-
 }

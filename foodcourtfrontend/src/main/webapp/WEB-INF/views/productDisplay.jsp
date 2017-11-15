@@ -34,10 +34,8 @@
 
 				<h2 style="text-align: center">${product.productName}</h2>
 
-				<img src="${images}/${product.productId}.jpg" class="img-responsive"
+				<img style="text-align: center"src="${images}/${product.productId}.jpg" class="img-responsive"
 					alt="${product.productName}">
-
-
 
 			</div>
 			<div class="col-sm-6">
@@ -53,8 +51,8 @@
 				<security:authorize access="!hasAuthority('ROLE_ADMIN')">
 					<form
 						action="${contextPath}/customer/addToCart/${product.productId}">
-						<h4>Enter Quantity</h4>
-						<input type="number" class="form-control" name="quantity">
+						<h4 style="color: black">Enter Quantity</h4>
+						<input type="number" class="form-control" name="quantity" required="true">
 						<br/>
 						<button class="btn btn-primary col-sm-5">Add to cart</button>
 					</form>

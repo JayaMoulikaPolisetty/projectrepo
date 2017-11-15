@@ -43,7 +43,10 @@ public class CustomerController {
 		
 		Customer customer = customerDao.getCustomerDetails(principal.getName());
 		Cart cart = customer.getCart();
-		CartItems cartItems = new CartItems();
+		CartItems cartItems=cartItemsDao.getProduct(productId, cart.getCartId());
+		if(cartItems==null)
+		{
+		cartItems = new CartItems();
 		cartItems.setProduct(product);
 		cartItems.setCartItemQuantity(quantity);
 		cartItems.setCart(cart);
@@ -53,13 +56,31 @@ public class CustomerController {
 		cart.setCartQuantity(cart.getCartQuantity()+cartItems.getCartItemQuantity());
 		cart.setTotalCartPrice(cart.getTotalCartPrice()+cartItems.getCartItemPrice());
 		cart.setCartItems(itemsList);
-		
-		cartItemsDao.addCartItems(cartItems);
-		cartDao.updateCart(cart);
 		m.addAttribute("cartItems",itemsList);
+		cartItemsDao.addCartItems(cartItems);
+		
+		}
+		else{
+			cartItems.setProduct(product);
+			cartItems.setCartItemPrice(cartItems.getCartItemPrice()+(quantity*product.getProductPrice()));
+			cartItems.setCartItemQuantity(cartItems.getCartItemQuantity()+quantity);
+			
+			ArrayList<CartItems> itemsList=new ArrayList<CartItems>();
+			itemsList.add(cartItems);
+			cart.setCartQuantity(cart.getCartQuantity()+cartItems.getCartItemQuantity());
+			cart.setTotalCartPrice(cart.getTotalCartPrice()+(quantity*product.getProductPrice()));
+			cart.setCartItems(itemsList);
+			m.addAttribute("cartItems",itemsList);
+			cartItemsDao.updateCartItems(cartItems);
+		}
+		
+		cartDao.updateCart(cart);
+		
 		m.addAttribute(product);
 		m.addAttribute(cart);
-		return "redirect:/products";
+		
+		
+		return "redirect:/customer/myCart";
 	}
 	
 	@RequestMapping("myCart")
@@ -72,6 +93,24 @@ public class CustomerController {
 		m.addAttribute("cartItems",cartItems);
 		m.addAttribute(cart);
 		return "myCart";
+	}
+	
+	@RequestMapping(value="deleteCartItems/{cartItemId}/cartItem")
+	public String deleteCartItem(@PathVariable("cartItemId")int id,Model m, Principal p)
+	{
+		CartItems cartItem = cartItemsDao.getCartItems(id);
+		Customer customer = customerDao.getCustomerDetails(p.getName());
+		Cart cart = customer.getCart();
+		cart.setCartId(cartItem.getCart().getCartId());
+	    cart.setCartQuantity(cart.getCartQuantity()-cartItem.getCartItemQuantity());
+	    cart.setTotalCartPrice(cart.getTotalCartPrice()-cartItem.getCartItemPrice());
+	    
+		customer.setCart(cart);
+		
+		cartDao.updateCart(cart);
+		cartItemsDao.deletCartItems(cartItem);
+		
+		return "redirect:/customer/myCart";
 	}
 	
 }

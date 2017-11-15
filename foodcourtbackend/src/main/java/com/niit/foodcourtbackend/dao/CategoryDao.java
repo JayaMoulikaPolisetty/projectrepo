@@ -18,4 +18,5 @@ public interface CategoryDao {
 	Category getCategory(Integer id);
 
 	List<Category> retreiveAllCategories();
+	
 }

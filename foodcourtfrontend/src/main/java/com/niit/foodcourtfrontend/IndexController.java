@@ -46,7 +46,7 @@ public class IndexController {
 	CartDao cartDao;
 
 	
-	@RequestMapping("/")
+	@RequestMapping({"/", "/home"})
 	public ModelAndView index(Model m,Principal principal) {
 		
 		if(principal!=null)
@@ -61,7 +61,10 @@ public class IndexController {
 		m.addAttribute("catlist", listcategories);
 		List<Product> listProducts = productDao.retreiveAllProducts();
 		m.addAttribute("prodlist", listProducts);
-	
+	/*	Customer customer = customerDao.getCustomerDetails(principal.getName());
+		Cart cart = customer.getCart();
+		m.addAttribute(cart);
+	    m.addAttribute(customer);*/
 		return new ModelAndView("index");
 	}
 
@@ -132,11 +135,5 @@ public class IndexController {
 		return new ModelAndView("productDisplay");
 	}
 
-	/*
-	 * @RequestMapping("/demo") public String demo() { return "demo"; }
-	 * 
-	 * 
-	 * @RequestMapping("/test") public String test() { return "test"; }
-	 */
-
+	
 }

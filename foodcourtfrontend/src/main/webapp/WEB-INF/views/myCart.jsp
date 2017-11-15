@@ -39,7 +39,7 @@
 					<td>${cartItem.cartItemQuantity}</td>
 					<td>${cartItem.cartItemPrice}</td>
 					
-					<td><a href="${contextPath}/customer/deletCartItems/${cartItem.cartItemId}"><button
+					<td><a href="${contextPath}/customer/deleteCartItems/${cartItem.cartItemId}/cartItem"><button
 								type="button" class="btn btn-danger">Remove</button></a></td>
 
 
@@ -51,6 +51,12 @@
 				    <td colspan="3">Total Price of Cart</td>
 				    <td>${cart.totalCartPrice}</td>
 				    <td></td>
+				</tr>
+				
+				<tr>
+				<td colspan = "3"  style = "text-align: center"><a href = "${contextPath}/products"><button
+								type="button" class="btn btn-primary" >Continue Shopping</button></a></td>
+				<td colspan = "2"></td>
 				</tr>
 		</table>
 	</div>

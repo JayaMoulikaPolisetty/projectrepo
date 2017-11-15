@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.niit.foodcourtbackend.Cart;
 import com.niit.foodcourtbackend.CartItems;
 import com.niit.foodcourtbackend.Category;
 import com.niit.foodcourtbackend.Product;
@@ -24,6 +25,7 @@ public class CartItemsDaoImpl implements CartItemsDao{
 	public boolean addCartItems(CartItems cartItems) {
 		
 		try {
+			
 			sessionFactory.getCurrentSession().persist(cartItems);
 		return true;
 		}catch (Exception e) {
@@ -82,6 +84,19 @@ public class CartItemsDaoImpl implements CartItemsDao{
 		
 	}
 
+	@Override
+	public CartItems getProduct(int productId, int cartId) {
 	
+		try {
+			return sessionFactory.getCurrentSession().createQuery("from CartItems where cart_cartId = :cartId and product_productId= :productId", CartItems.class).
+					setParameter("cartId", cartId).
+					setParameter("productId", productId).getSingleResult();
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+			return null;
+		}
+	}
 
 }
