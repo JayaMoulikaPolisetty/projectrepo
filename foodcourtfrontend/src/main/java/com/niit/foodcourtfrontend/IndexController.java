@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,6 +45,9 @@ public class IndexController {
 
 	@Autowired
 	CartDao cartDao;
+	
+	@Autowired
+	HttpSession session;
 
 	
 	@RequestMapping({"/", "/home"})
@@ -51,7 +55,16 @@ public class IndexController {
 		
 		if(principal!=null)
 		{
-			System.out.println(principal.getName());
+		    
+			Customer customer = customerDao.getCustomerDetails(principal.getName());
+			
+			if(customer.getRole() != "ROLE_ADMIN") 
+			{
+				Cart cart = customer.getCart();
+				m.addAttribute(cart);
+			    m.addAttribute(customer);
+			}
+			
 		}
 		else
 		{
@@ -61,10 +74,7 @@ public class IndexController {
 		m.addAttribute("catlist", listcategories);
 		List<Product> listProducts = productDao.retreiveAllProducts();
 		m.addAttribute("prodlist", listProducts);
-	/*	Customer customer = customerDao.getCustomerDetails(principal.getName());
-		Cart cart = customer.getCart();
-		m.addAttribute(cart);
-	    m.addAttribute(customer);*/
+	
 		return new ModelAndView("index");
 	}
 
@@ -95,6 +105,7 @@ public class IndexController {
 	@RequestMapping(value = "/login")
 	public String login(Model m) {
 
+		
 		List<Product> listProducts = productDao.retreiveAllProducts();
 		m.addAttribute("prodlist", listProducts);
 		List<Category> listcategories = categoryDao.retreiveAllCategories();
@@ -103,7 +114,17 @@ public class IndexController {
 	}
 	
 	@RequestMapping("/products")
-	public ModelAndView product(Model m) {
+	public ModelAndView product(Model m, Principal principal) {
+		
+		if(principal!=null)
+		{
+		
+			Customer customer = customerDao.getCustomerDetails(principal.getName());
+			Cart cart = customer.getCart();
+			m.addAttribute(cart);
+		    m.addAttribute(customer);
+		}
+		
 		Product product = new Product();
 		m.addAttribute(product);
 
@@ -116,8 +137,16 @@ public class IndexController {
 	}
 
 	@RequestMapping(value = "/CategorizedProducts/{catId}", method = RequestMethod.GET)
-	public ModelAndView products(@PathVariable("catId") int catId, Model m) {
+	public ModelAndView products(@PathVariable("catId") int catId, Model m, Principal principal) {
 
+		if(principal!=null)
+		{
+		
+			Customer customer = customerDao.getCustomerDetails(principal.getName());
+			Cart cart = customer.getCart();
+			m.addAttribute(cart);
+		    m.addAttribute(customer);
+		}
 		List<Category> listcategories = categoryDao.retreiveAllCategories();
 		m.addAttribute("catlist", listcategories);
 		Category cat = categoryDao.getCategory(catId);
@@ -127,7 +156,17 @@ public class IndexController {
 	}
 
 	@RequestMapping(value = "/productDisplay/{productId}", method = RequestMethod.GET)
-	public ModelAndView prodDisplay(@PathVariable("productId") int productId, Model m) {
+	public ModelAndView prodDisplay(@PathVariable("productId") int productId, Model m,Principal principal) {
+		
+	
+		if(principal!=null)
+		{
+		
+			Customer customer = customerDao.getCustomerDetails(principal.getName());
+			Cart cart = customer.getCart();
+			m.addAttribute(cart);
+		    m.addAttribute(customer);
+		}
 		List<Category> listcategories = categoryDao.retreiveAllCategories();
 		m.addAttribute("catlist", listcategories);
 		Product product = productDao.getProduct(productId);

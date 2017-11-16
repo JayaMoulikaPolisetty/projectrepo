@@ -95,7 +95,7 @@ public class CustomerController {
 		return "myCart";
 	}
 	
-	@RequestMapping(value="deleteCartItems/{cartItemId}/cartItem")
+	@RequestMapping(value="deleteCartItems/{cartItemId}")
 	public String deleteCartItem(@PathVariable("cartItemId")int id,Model m, Principal p)
 	{
 		CartItems cartItem = cartItemsDao.getCartItems(id);
@@ -111,6 +111,28 @@ public class CustomerController {
 		cartItemsDao.deletCartItems(cartItem);
 		
 		return "redirect:/customer/myCart";
+	}
+	
+	@RequestMapping(value="/editCartItems/{cartItemId}")
+	public String editcartItem(@PathVariable(value="cartItemId")int id, Model m, @RequestParam(value ="quantity") int quantity, Principal p)
+	{
+		
+		CartItems cartItem = cartItemsDao.getCartItems(id);
+		Customer customer = customerDao.getCustomerDetails(p.getName());
+		Cart cart = customer.getCart();
+		cart.setCartQuantity(cart.getCartQuantity()-cartItem.getCartItemQuantity());
+		cart.setTotalCartPrice(cart.getTotalCartPrice()-cartItem.getCartItemPrice());
+		Product product = cartItem.getProduct();
+		cartItem.setCartItemQuantity(quantity);
+		cartItem.setCartItemPrice(quantity*product.getProductPrice());
+		cart.setCartId(cartItem.getCart().getCartId());
+		cart.setCartQuantity(cart.getCartQuantity()+cartItem.getCartItemQuantity());
+		cart.setTotalCartPrice(cart.getTotalCartPrice()+cartItem.getCartItemPrice());
+		cartItemsDao.updateCartItems(cartItem);
+		customer.setCart(cart);
+		cartDao.updateCart(cart);
+		return "redirect:/customer/myCart";
+		
 	}
 	
 }

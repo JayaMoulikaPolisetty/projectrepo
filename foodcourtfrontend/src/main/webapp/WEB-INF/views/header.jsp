@@ -62,12 +62,16 @@
 			</security:authorize>
 
 			<security:authorize access="hasAuthority('ROLE_USER')">
+			<li><a href="#">My Profile</a></li>
 				<li><a href="${contextPath}/customer/myCart"><span
 						class="glyphicon glyphicon-shopping-cart"
-						style="margin-left: 2px; margin-right: 2px;"></span><%-- <span
-						style="border-radius: 10px; background-color: blue; color: white; padding: 8px; margin-right: 2px;">${cart.cartQuantity}</span> --%>My
+						style="margin-left: 2px; margin-right: 2px;"></span><span
+						style="border-radius: 10px; background-color: red; color: white; padding: 8px; margin-right: 2px;">${cart.cartQuantity}</span>My
 						Cart</a></li>
-				<li id="logout"><a href="${contextPath}/perform_logout"><span
+				
+			</security:authorize>
+			<security:authorize access="isAuthenticated()">
+			<li id="logout"><a href="${contextPath}/perform_logout"><span
 						class="glyphicon glyphicon-user"></span>Logout</a></li>
 			</security:authorize>
 		</ul>

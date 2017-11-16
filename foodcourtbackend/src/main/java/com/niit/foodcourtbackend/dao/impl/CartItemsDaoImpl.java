@@ -17,18 +17,19 @@ import com.niit.foodcourtbackend.dao.CartItemsDao;
 
 @Repository("cartItemsDao")
 @Transactional
-public class CartItemsDaoImpl implements CartItemsDao{
+public class CartItemsDaoImpl implements CartItemsDao {
 
 	@Autowired
 	SessionFactory sessionFactory;
+
 	@Override
 	public boolean addCartItems(CartItems cartItems) {
-		
+
 		try {
-			
+
 			sessionFactory.getCurrentSession().persist(cartItems);
-		return true;
-		}catch (Exception e) {
+			return true;
+		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e);
 			return false;
@@ -37,16 +38,13 @@ public class CartItemsDaoImpl implements CartItemsDao{
 
 	@Override
 	public boolean deletCartItems(CartItems cartItems) {
-		try
-		{
+		try {
 			sessionFactory.getCurrentSession().remove(cartItems);
 			return true;
-		}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			return false;
 		}
-		 
+
 	}
 
 	@Override
@@ -65,7 +63,7 @@ public class CartItemsDaoImpl implements CartItemsDao{
 	public CartItems getCartItems(Integer id) {
 		try {
 			return sessionFactory.getCurrentSession().get(CartItems.class, id);
-			
+
 		} catch (Exception e) {
 			System.out.println(e);
 			return null;
@@ -76,24 +74,24 @@ public class CartItemsDaoImpl implements CartItemsDao{
 	public ArrayList<CartItems> retreiveAllCartItems() {
 		try {
 
-			return (ArrayList<CartItems>) sessionFactory.getCurrentSession().createQuery("from CartItems", CartItems.class).getResultList();
+			return (ArrayList<CartItems>) sessionFactory.getCurrentSession()
+					.createQuery("from CartItems", CartItems.class).getResultList();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return null;
 		}
-		
+
 	}
 
 	@Override
 	public CartItems getProduct(int productId, int cartId) {
-	
+
 		try {
-			return sessionFactory.getCurrentSession().createQuery("from CartItems where cart_cartId = :cartId and product_productId= :productId", CartItems.class).
-					setParameter("cartId", cartId).
-					setParameter("productId", productId).getSingleResult();
-		}
-		catch(Exception e)
-		{
+			return sessionFactory.getCurrentSession()
+					.createQuery("from CartItems where cart_cartId = :cartId and product_productId= :productId",
+							CartItems.class)
+					.setParameter("cartId", cartId).setParameter("productId", productId).getSingleResult();
+		} catch (Exception e) {
 			System.out.println(e);
 			return null;
 		}

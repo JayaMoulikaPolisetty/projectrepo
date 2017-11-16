@@ -19,49 +19,53 @@
 	<c:set var="images" value="${contextPath}/resources/carouselPics" />
 	<c:set var="image" value="${contextPath}/resources" />
 	<div class="container">
-	
-	<div class="table-responsive">
-		<table border="2" align="center" class="table table-inverse"
-			style="width: 70%">
-			
-			<tr>
-				<td>Product</td>
-				<td>Price of Product</td>
-				<td>Quantity</td>
-				<td>Total Price</td>
-				<td>Remove from Cart</td>
-			</tr>
-			<c:forEach items="${cartItems}" var="cartItem">
-			
-				<tr>
-					<td>${cartItem.product.productName}</td>
-					<td>${cartItem.product.productPrice}</td>
-					<td>${cartItem.cartItemQuantity}</td>
-					<td>${cartItem.cartItemPrice}</td>
-					
-					<td><a href="${contextPath}/customer/deleteCartItems/${cartItem.cartItemId}/cartItem"><button
-								type="button" class="btn btn-danger">Remove</button></a></td>
 
+		<div class="table-responsive">
+			<table border="2" align="center" class="table table-inverse"
+				style="width: 70%">
 
-				</tr>
-				
-			</c:forEach>
-			
 				<tr>
-				    <td colspan="3">Total Price of Cart</td>
-				    <td>${cart.totalCartPrice}</td>
-				    <td></td>
+					<td>Product</td>
+					<td>Price of Product</td>
+					<td>Quantity</td>
+					<td>Total Price</td>
+					<td></td>
 				</tr>
-				
+				<c:forEach items="${cartItems}" var="cartItem">
+					<tr>
+						<form action="${contextPath}/customer/editCartItems/${cartItem.cartItemId}">
+						<td>${cartItem.product.productName}</td>
+						<td>${cartItem.product.productPrice}</td>
+						<td><input type="number" class="form-control" name="quantity"
+							value="${cartItem.cartItemQuantity}"></td>
+						<td>${cartItem.cartItemPrice}</td>
+
+						<td>
+							<button type="submit" class="btn btn-primary">Edit</button> <%-- <a href="${contextPath}/customer/editCartItems/${cartItem.cartItemId}/cartItem"><button 
+								type="button" class="btn btn-primary">Edit</button></a> --%>
+						</form>
+						<a
+							href="${contextPath}/customer/deleteCartItems/${cartItem.cartItemId}/cartItem"><button
+								type="button" class="btn btn-danger">Remove</button></a>
+						</td>
+				</c:forEach>
+				</tr>
 				<tr>
-				<td colspan = "3"  style = "text-align: center"><a href = "${contextPath}/products"><button
-								type="button" class="btn btn-primary" >Continue Shopping</button></a></td>
-				<td colspan = "2"></td>
+					<td colspan="3">Total Price of Cart</td>
+					<td>${cart.totalCartPrice}</td>
+					<td></td>
 				</tr>
-		</table>
+
+				<tr>
+					<td colspan="3" style="text-align: center"><a
+						href="${contextPath}/products"><button type="button"
+								class="btn btn-primary">Continue Shopping</button></a></td>
+					<td colspan="2"></td>
+				</tr>
+			</table>
+		</div>
+
 	</div>
-
-</div>
 </body>
 <%@include file="footer.jsp"%>
 </html>
