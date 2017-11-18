@@ -28,6 +28,8 @@ public class Product implements Serializable{
 	@OneToOne(mappedBy = "product")
 	private CartItems cartItems;
 	
+	@OneToOne(mappedBy = "product")
+	private OrderedItems orderedItems;
 	
 	@OneToOne 
 	private Category category;

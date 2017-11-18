@@ -62,7 +62,7 @@
 			</security:authorize>
 
 			<security:authorize access="hasAuthority('ROLE_USER')">
-			<li><a href="#">My Profile</a></li>
+		
 				<li><a href="${contextPath}/customer/myCart"><span
 						class="glyphicon glyphicon-shopping-cart"
 						style="margin-left: 2px; margin-right: 2px;"></span><span

@@ -135,4 +135,11 @@ public class CustomerController {
 		
 	}
 	
+	/*@RequestMapping(value="/checkout")
+	public String checkOutProcess()
+	{
+		
+		return "redirect:/customer/checkout";
+	}*/
+	
 }

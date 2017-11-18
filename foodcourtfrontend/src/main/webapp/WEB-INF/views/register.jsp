@@ -21,7 +21,7 @@
 <body>
 	<form:form id="regForm" modelAttribute="customer"
 		action="registerProcess" method="post"
-		onsubmit="return validateConPass()">
+		 novalidate="true">
 		<h2 style="text-align: center">Registration form</h2>
 		</br>
 		<div class="container">
@@ -33,26 +33,33 @@
 						<label for="firstName">First Name:</label>
 						<form:input path="firstName" name="firstName" id="firstName"
 							required="true" pattern="[a-zA-Z]{4,12}" class="form-control" title="min 4 max 12 char" />
+							<form:errors path="firstName" style="color: red"/>
+						
 					</div>
 					<div class="form-group">
 						<label for="lastName">Last Name:</label>
 						<form:input path="lastName" name="lastName" id="lastName"
-							required="true" pattern="[a-zA-Z]{4,12}" class="form-control" title="min 4 max 12 char"/>
+							required="true" pattern="[a-zA-Z]{4,12}" class="form-control" title="min 4 max 12 char" />
+					
+					<form:errors path="lastName" style="color: red"/>
 					</div>
 					<div class="form-group">
 						<label for="address">Address:</label>
 						<form:input path="address" name="address" id="address"
-							required="true" class="form-control" />
+							required="true" class="form-control" novalidate="true" />
+					
 					</div>
 					<div class="form-group">
 						<label for="username">Username:</label>
 						<form:input path="username" name="username" id="username"
-							required="true" pattern="[a-zA-Z]{4,12}" class="form-control" title="min-4 max-12 char"/>
+							required="true" pattern="[a-zA-Z]{4,12}" class="form-control" title="min-4 max-12 char" />
+					<form:errors path="username" style="color: red"/>
 					</div>
 					<div class="form-group">
 						<label for="password">Password:</label>
 						<form:input path="password" type="password" id="password"
-							required="true" pattern="[a-zA-Z0-9]{8,12}" class="form-control" title="min-8 max-12 char"/>
+							required="true" pattern="[a-zA-Z0-9]{8,12}" class="form-control" title="min-8 max-12 char" />
+					<form:errors path="password"/>
 					</div>
 					<div class="form-group">
 						<label for="password">Confirm Password:</label>
@@ -60,12 +67,14 @@
 							id="confirmPassword" required="true" pattern="[a-zA-Z0-9]{8,12}" title="min-4 max-12 char"
 							class="form-control" />
 					</div>
-					<div id="passerror" style="color: red"></div>
+					
+				    <div style="color: red">${errorPass}</div>
 					<form:input path="is_Active" hidden="true" value="TRUE" />
 					<div class="form-group">
 						<label for="mobile">Mobile:</label>
 						<form:input path="mobile" name="mobile" id="mobile"
-							required="true" pattern="[0-9]{10,10}" class="form-control"/>
+							required="true" pattern="[0-9]{10,10}" class="form-control" />
+					<form:errors path="mobile"/>
 					</div>
 					<button type="submit" class="btn btn-default">Register</button>
 

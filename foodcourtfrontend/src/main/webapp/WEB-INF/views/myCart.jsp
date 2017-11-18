@@ -33,15 +33,16 @@
 				</tr>
 				<c:forEach items="${cartItems}" var="cartItem">
 					<tr>
-						<form action="${contextPath}/customer/editCartItems/${cartItem.cartItemId}">
-						<td>${cartItem.product.productName}</td>
-						<td>${cartItem.product.productPrice}</td>
-						<td><input type="number" class="form-control" name="quantity"
-							value="${cartItem.cartItemQuantity}"></td>
-						<td>${cartItem.cartItemPrice}</td>
+						<form
+							action="${contextPath}/customer/editCartItems/${cartItem.cartItemId}">
+							<td>${cartItem.product.productName}</td>
+							<td>${cartItem.product.productPrice}</td>
+							<td><input type="number" class="form-control"
+								name="quantity" value="${cartItem.cartItemQuantity}"></td>
+							<td>${cartItem.cartItemPrice}</td>
 
-						<td>
-							<button type="submit" class="btn btn-primary">Edit</button> <%-- <a href="${contextPath}/customer/editCartItems/${cartItem.cartItemId}/cartItem"><button 
+							<td>
+								<button type="submit" class="btn btn-primary">Edit</button> <%-- <a href="${contextPath}/customer/editCartItems/${cartItem.cartItemId}/cartItem"><button 
 								type="button" class="btn btn-primary">Edit</button></a> --%>
 						</form>
 						<a
@@ -58,9 +59,14 @@
 
 				<tr>
 					<td colspan="3" style="text-align: center"><a
-						href="${contextPath}/products"><button type="button"
-								class="btn btn-primary">Continue Shopping</button></a></td>
-					<td colspan="2"></td>
+						href="${contextPath}/products">
+							<button type="button" class="btn btn-primary">Continue
+								Shopping</button>
+					</a></td>
+					<td colspan="2" style="text-align: center"><a
+						href="${contextPath}/customer/checkout">
+							<button type="submit" class="btn btn-primary">Check Out</button>
+					</a></td>
 				</tr>
 			</table>
 		</div>
