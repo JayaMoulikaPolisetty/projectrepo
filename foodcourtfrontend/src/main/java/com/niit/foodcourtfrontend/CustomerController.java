@@ -14,10 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.niit.foodcourtbackend.Cart;
 import com.niit.foodcourtbackend.CartItems;
 import com.niit.foodcourtbackend.Customer;
+import com.niit.foodcourtbackend.OrderTable;
+import com.niit.foodcourtbackend.OrderedItems;
 import com.niit.foodcourtbackend.Product;
 import com.niit.foodcourtbackend.dao.CartDao;
 import com.niit.foodcourtbackend.dao.CartItemsDao;
 import com.niit.foodcourtbackend.dao.CustomerDao;
+import com.niit.foodcourtbackend.dao.OrderTableDao;
+import com.niit.foodcourtbackend.dao.OrderedItemsDao;
 import com.niit.foodcourtbackend.dao.ProductDao;
 
 @Controller
@@ -35,6 +39,12 @@ public class CustomerController {
 	
 	@Autowired
 	CartDao cartDao;
+	
+	@Autowired
+	OrderedItemsDao orderedItemsDao;
+	
+	@Autowired
+	OrderTableDao orderTableDao;
 
 	@RequestMapping("/addToCart/{productId}")
 	public String addToCart(@PathVariable("productId") int productId, Model m, @RequestParam(value ="quantity") int quantity, Principal principal)
@@ -135,11 +145,50 @@ public class CustomerController {
 		
 	}
 	
-	/*@RequestMapping(value="/checkout")
-	public String checkOutProcess()
+	@RequestMapping(value="/checkout")
+	public String checkout()
 	{
+		return "checkout";
+	}
+	
+	@RequestMapping(value="/confirm")
+	public String orderProcess(Principal p)
+	{
+		Customer customer= customerDao.getCustomerDetails(p.getName());
+		Cart cart = customer.getCart();
+		OrderTable orderTable = new OrderTable();
+		orderTable.setCustomer(customer);
+		List<CartItems> cartItems = cart.getCartItems();
+		List<OrderedItems> orderItemsList= new ArrayList<>();
+		cart.setCartQuantity(0);
+		cart.setTotalCartPrice(0);
+		cartDao.updateCart(cart);
+		for(CartItems item : cartItems)
+		{
+			OrderedItems orderItem= new OrderedItems();
 		
-		return "redirect:/customer/checkout";
-	}*/
+			orderItem.setProduct(item.getProduct());
+			orderItem.setOrderedItemQuantity(item.getCartItemQuantity());
+			orderItem.setOrderedItemPrice(item.getCartItemPrice());
+			orderItem.setUnitPrice(item.getProduct().getProductPrice());
+			orderItem.setOrderTable(orderTable);
+			orderTable.setTotalQuantity(orderTable.getTotalQuantity()+orderItem.getOrderedItemQuantity());
+			orderTable.setTotalPrice(orderTable.getTotalPrice()+(orderItem.getOrderedItemPrice()*orderItem.getOrderedItemQuantity()));
+			orderItemsList.add(orderItem);
+			cartItemsDao.deletCartItems(item);
+			
+		}
+		orderTable.setOrderedItems(orderItemsList);
+		orderTableDao.placeOrder(orderTable);
+		
+		for(OrderedItems o:orderItemsList)
+		{
+
+			orderedItemsDao.addOrderedItem(o);
+			
+		}
+		
+		return "redirect:/";
+	}
 	
 }

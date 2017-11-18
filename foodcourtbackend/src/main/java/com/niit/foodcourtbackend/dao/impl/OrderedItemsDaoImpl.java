@@ -5,11 +5,15 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.foodcourtbackend.Category;
 import com.niit.foodcourtbackend.OrderedItems;
 import com.niit.foodcourtbackend.dao.OrderedItemsDao;
 
+@Repository("orderItemsDao")
+@Transactional
 public class OrderedItemsDaoImpl implements OrderedItemsDao{
 
 	@Autowired
@@ -18,7 +22,7 @@ public class OrderedItemsDaoImpl implements OrderedItemsDao{
 	@Override
 	public boolean addOrderedItem(OrderedItems orderedItems) {
 		try {
-			sessionFactory.getCurrentSession().save(orderedItems);
+			sessionFactory.getCurrentSession().persist(orderedItems);
 			return true;
 		}
 		catch(Exception e) {
@@ -38,18 +42,7 @@ public class OrderedItemsDaoImpl implements OrderedItemsDao{
 		}
 	}
 
-	@Override
-	public boolean updateOrderedITem(OrderedItems orderedItems) {
-		try {
-			sessionFactory.getCurrentSession().update(orderedItems);
-			return true;
-		}
-		catch(Exception e)
-		{
-		return false;
-		}
-	}
-
+	
 	@Override
 	public OrderedItems getOrderedItem(int id) {
 		try

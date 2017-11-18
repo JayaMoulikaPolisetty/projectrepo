@@ -2,11 +2,15 @@ package com.niit.foodcourtbackend.dao.impl;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.foodcourtbackend.Category;
 import com.niit.foodcourtbackend.OrderTable;
 import com.niit.foodcourtbackend.dao.OrderTableDao;
 
+@Repository("orderTableDao")
+@Transactional
 public class OrderTableDaoImpl implements OrderTableDao{
 	
 	@Autowired
@@ -18,7 +22,7 @@ public class OrderTableDaoImpl implements OrderTableDao{
 		
 			try {
 			
-			sessionFactory.getCurrentSession().save(orderTable);
+			sessionFactory.getCurrentSession().persist(orderTable);
 			return true;
 			
 		}

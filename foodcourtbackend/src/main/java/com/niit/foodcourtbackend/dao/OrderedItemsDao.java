@@ -8,8 +8,6 @@ public interface OrderedItemsDao {
 
 	boolean addOrderedItem(OrderedItems orderedItems);
 	boolean deleteOrderedItem(OrderedItems orderedItems);
-	boolean updateOrderedITem(OrderedItems orderedItems);
-	
 	OrderedItems getOrderedItem(int id);
 	List<OrderedItems> orderedItems();
 	

@@ -22,6 +22,8 @@ public class OrderedItems
 	@OneToOne(fetch=FetchType.EAGER)
 	private Product product;
 	
+	private double unitPrice;
+	
 	private double orderedItemPrice;
 	
 	private int orderedItemQuantity;
@@ -67,6 +69,14 @@ public class OrderedItems
 
 	public void setOrderTable(OrderTable orderTable) {
 		this.orderTable = orderTable;
+	}
+
+	public double getUnitPrice() {
+		return this.unitPrice;
+	}
+
+	public void setUnitPrice(double unitPrice) {
+		this.unitPrice = unitPrice;
 	}
 
 	

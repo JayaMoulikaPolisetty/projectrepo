@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -21,7 +22,10 @@ public class OrderTable {
 	@OneToMany(mappedBy="orderTable",fetch=FetchType.EAGER)
 	List<OrderedItems> orderedItems;
 	
-	@OneToOne
+	private int totalQuantity;
+	private double totalPrice;
+	
+	@ManyToOne
 	private Customer customer;
 
 	public int getOrderId() {
@@ -48,5 +52,21 @@ public class OrderTable {
 		this.customer = customer;
 	}
 
+	public double getTotalPrice() {
+		return this.totalPrice;
+	}
 
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public int getTotalQuantity() {
+		return this.totalQuantity;
+	}
+
+	public void setTotalQuantity(int totalQuantity) {
+		this.totalQuantity = totalQuantity;
+	}
+	
+	
 }

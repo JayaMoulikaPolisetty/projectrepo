@@ -1,9 +1,12 @@
 package com.niit.foodcourtbackend;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
@@ -51,8 +54,8 @@ public class Customer {
 	@OneToOne(mappedBy = "customer")
 	private Cart cart;
 	
-	@OneToOne(mappedBy = "customer")
-	private OrderTable orderTable;
+	@OneToMany(mappedBy = "customer")
+	List <OrderTable> orderTable;
 
 	public String getRole() {
 		return this.role;
@@ -62,11 +65,11 @@ public class Customer {
 		this.role = role;
 	}
 
-	public OrderTable getOrderTable() {
+	public List<OrderTable> getOrderTable() {
 		return this.orderTable;
 	}
 
-	public void setOrderTable(OrderTable orderTable) {
+	public void setOrderTable(List<OrderTable> orderTable) {
 		this.orderTable = orderTable;
 	}
 
