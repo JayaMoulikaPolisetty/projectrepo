@@ -6,7 +6,7 @@ public interface OrderTableDao {
 	
 	boolean placeOrder(OrderTable orderTable);
 	boolean cancelOrder(OrderTable orderTable);
-	
+	boolean updateOrder(OrderTable orderTable);
 	OrderTable getOrder(Integer id);
 
 }

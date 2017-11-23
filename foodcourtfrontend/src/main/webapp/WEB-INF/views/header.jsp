@@ -65,8 +65,8 @@
 		
 				<li><a href="${contextPath}/customer/myCart"><span
 						class="glyphicon glyphicon-shopping-cart"
-						style="margin-left: 2px; margin-right: 2px;"></span><span
-						style="border-radius: 10px; background-color: red; color: white; padding: 8px; margin-right: 2px;">${cart.cartQuantity}</span>My
+						style="margin-left: 2px; margin-right: 2px;"></span>
+						<span style="border-radius: 10px; background-color: red; color: white; padding: 8px; margin-right: 2px;">${cart.cartQuantity}</span>My
 						Cart</a></li>
 				
 			</security:authorize>

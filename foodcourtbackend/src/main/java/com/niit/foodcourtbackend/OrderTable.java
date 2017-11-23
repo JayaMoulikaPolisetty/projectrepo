@@ -27,6 +27,8 @@ public class OrderTable {
 	
 	@ManyToOne
 	private Customer customer;
+	
+	//private String DeliveryAddress;
 
 	public int getOrderId() {
 		return this.orderId;
@@ -67,6 +69,15 @@ public class OrderTable {
 	public void setTotalQuantity(int totalQuantity) {
 		this.totalQuantity = totalQuantity;
 	}
+
+	/*public String getDeliveryAddress() {
+		return this.DeliveryAddress;
+	}
+
+	public void setDeliveryAddress(String deliveryAddress) {
+		this.DeliveryAddress = deliveryAddress;
+	}*/
+	
 	
 	
 }

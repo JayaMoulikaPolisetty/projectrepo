@@ -56,5 +56,19 @@ public class OrderTableDaoImpl implements OrderTableDao{
 		}
 	}
 
+	@Override
+	public boolean updateOrder(OrderTable orderTable) {
+try {
+			
+		    sessionFactory.getCurrentSession().update(orderTable);
+			return true;
+			
+		}
+	catch(Exception e) {
+		return false;
+	}
+		
+	}
+
 	
 }

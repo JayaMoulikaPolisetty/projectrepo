@@ -49,6 +49,10 @@ public class CustomerController {
 	@RequestMapping("/addToCart/{productId}")
 	public String addToCart(@PathVariable("productId") int productId, Model m, @RequestParam(value ="quantity") int quantity, Principal principal)
 	{
+		
+	System.out.println(principal);
+		
+		
 		Product product = productDao.getProduct(productId);
 		
 		Customer customer = customerDao.getCustomerDetails(principal.getName());
@@ -93,9 +97,10 @@ public class CustomerController {
 		return "redirect:/customer/myCart";
 	}
 	
-	@RequestMapping("myCart")
+	@RequestMapping("/myCart")
 	public String myCart(Model m, Principal principal)
 	{
+		System.out.println(principal);
 		Customer customer=customerDao.getCustomerDetails(principal.getName());
 		Cart cart = customer.getCart();
 		List<CartItems> cartItems = cart.getCartItems();
@@ -105,7 +110,7 @@ public class CustomerController {
 		return "myCart";
 	}
 	
-	@RequestMapping(value="deleteCartItems/{cartItemId}")
+	@RequestMapping(value="deleteCartItems/{cartItemId}/cartItem")
 	public String deleteCartItem(@PathVariable("cartItemId")int id,Model m, Principal p)
 	{
 		CartItems cartItem = cartItemsDao.getCartItems(id);
@@ -146,15 +151,23 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value="/checkout")
-	public String checkout()
+	public String checkout(Principal principal, Model m)
 	{
+		Customer customer=customerDao.getCustomerDetails(principal.getName());
+		Cart cart = customer.getCart();
+		List<CartItems> cartItems = cart.getCartItems();
+		
+		m.addAttribute("cartItems",cartItems);
+		m.addAttribute(cart);
+		m.addAttribute(customer);
 		return "checkout";
 	}
 	
 	@RequestMapping(value="/confirm")
-	public String orderProcess(Principal p)
+	public String orderProcess(Principal p, Model m)
 	{
 		Customer customer= customerDao.getCustomerDetails(p.getName());
+		
 		Cart cart = customer.getCart();
 		OrderTable orderTable = new OrderTable();
 		orderTable.setCustomer(customer);
@@ -178,8 +191,20 @@ public class CustomerController {
 			cartItemsDao.deletCartItems(item);
 			
 		}
+		/*if(deliveryAddress==null)
+		{
+			
+			orderTable.setDeliveryAddress(customer.getAddress());
+		}
+		else
+		{
+			orderTable.setDeliveryAddress(deliveryAddress);
+			
+		}*/
 		orderTable.setOrderedItems(orderItemsList);
 		orderTableDao.placeOrder(orderTable);
+		
+		
 		
 		for(OrderedItems o:orderItemsList)
 		{
@@ -188,7 +213,14 @@ public class CustomerController {
 			
 		}
 		
-		return "redirect:/";
+		return "invoice";
+	}
+	
+	@RequestMapping(value="/invoice")
+	public String invoice()
+	{
+		
+		return "invoice";
 	}
 	
 }
